@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
 import 'screens/welcome_screen.dart';
+import 'screens/second_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -8,9 +9,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-//#592538
-  // #D9736A
-  //#A64153
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -22,6 +20,7 @@ class MyApp extends StatelessWidget {
       title: 'Forfun Teller',
       routes: {
         '/': (context) => const WelcomePage(),
+        '/second': (context) => SecondPage(),
       },
     );
   }
