@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:forfun_teller/services/provider/auth_services.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class MainScaffold extends StatelessWidget {
   final Widget childWidget;
+  String bgImage;
 
-  const MainScaffold({required this.childWidget});
+  MainScaffold({required this.childWidget, required this.bgImage});
 
   @override
   Widget build(BuildContext context) {
@@ -11,14 +15,15 @@ class MainScaffold extends StatelessWidget {
       body: Stack(
         children: [
           Container(
-            decoration: const BoxDecoration(
+            decoration: BoxDecoration(
               image: DecorationImage(
-                image: AssetImage('images/welcome_bg1.jpg'),
+                image: AssetImage(bgImage),
                 fit: BoxFit.cover,
               ),
             ),
           ),
           Container(
+            height: double.infinity,
             width: double.infinity,
             decoration: BoxDecoration(
               gradient: LinearGradient(
@@ -34,6 +39,16 @@ class MainScaffold extends StatelessWidget {
               child: childWidget,
             ),
           ),
+          Provider.of<AuthServices>(context).isLoading
+              ? Center(
+                  child: Container(
+                    color: Colors.black.withOpacity(0.5),
+                    child: const SpinKitSpinningLines(
+                      color: Colors.white,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );
