@@ -6,6 +6,8 @@ import 'package:forfun_teller/constants.dart';
 class AuthServices extends ChangeNotifier {
   final userColection = FirebaseFirestore.instance.collection('users');
   final auth = FirebaseAuth.instance;
+  final currentUser = FirebaseAuth.instance.currentUser;
+
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
@@ -24,6 +26,7 @@ class AuthServices extends ChangeNotifier {
           .createUserWithEmailAndPassword(email: email, password: password);
       await _registration(
           email: email, password: password, uid: userCredential.user!.uid);
+
       customToast(
           context: context,
           msg: 'Kayıt başarılı',

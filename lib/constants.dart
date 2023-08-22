@@ -30,7 +30,7 @@ const List<String> welcomeTranslations = [
 
 const TextStyle kSectionTitleStyle = TextStyle(
   color: Colors.white,
-  fontSize: 25,
+  fontSize: 30,
 );
 
 const InputDecoration kInputDecorationStyle = InputDecoration(

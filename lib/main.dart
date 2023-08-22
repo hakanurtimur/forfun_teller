@@ -1,12 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
-import 'package:forfun_teller/screens/logged_screen.dart';
+import 'package:forfun_teller/screens/logged_in_screen.dart';
+import 'package:forfun_teller/services/provider/cloud_services.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'services/provider/auth_services.dart';
+import 'screens/profile_screen.dart';
+import 'screens/main_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +25,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(
           create: (context) => AuthServices(),
-        )
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CloudServices(),
+        ),
       ],
       child: MaterialApp(
         theme: ThemeData(
@@ -35,7 +41,9 @@ class MyApp extends StatelessWidget {
           '/': (context) => const WelcomePage(),
           '/signup': (context) => SignupPage(),
           '/login': (context) => LoginPage(),
-          '/logged': (context) => SuccessScreen(),
+          '/logged': (context) => LoggedInScreen(),
+          '/profile': (context) => ProfilePage(),
+          '/main': (context) => MainPage(),
         },
       ),
     );

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
 import 'package:forfun_teller/services/provider/auth_services.dart';
-import 'package:forfun_teller/widgets/main_scaffold.dart';
+import 'package:forfun_teller/widgets/auth_scaffold.dart';
 import 'package:forfun_teller/widgets/signup_form.dart';
 import 'package:provider/provider.dart';
 
@@ -49,7 +49,7 @@ class _SignupPageState extends State<SignupPage> {
 
   @override
   Widget build(BuildContext context) {
-    return MainScaffold(
+    return AuthScaffold(
       bgImage: 'images/welcome_bg2.jpg',
       childWidget: SingleChildScrollView(
         child: Column(

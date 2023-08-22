@@ -3,11 +3,11 @@ import 'package:forfun_teller/services/provider/auth_services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class MainScaffold extends StatelessWidget {
+class AuthScaffold extends StatelessWidget {
   final Widget childWidget;
   String bgImage;
 
-  MainScaffold({required this.childWidget, required this.bgImage});
+  AuthScaffold({required this.childWidget, required this.bgImage});
 
   @override
   Widget build(BuildContext context) {
