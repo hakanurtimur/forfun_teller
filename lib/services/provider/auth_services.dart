@@ -11,6 +11,7 @@ class AuthServices extends ChangeNotifier {
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
+
   void _setLoading(bool value) {
     _isLoading = value;
     notifyListeners();
@@ -52,7 +53,7 @@ class AuthServices extends ChangeNotifier {
           context: context,
           msg: 'Giriş başarılı',
           backgroundColor: kSuccessColor);
-      Navigator.pushNamed(context, '/logged');
+      Navigator.pushReplacementNamed(context, '/logged');
     } on FirebaseAuthException catch (e) {
       customToast(
           msg: e.message!, context: context, backgroundColor: kErrorColor);
@@ -71,5 +72,9 @@ class AuthServices extends ChangeNotifier {
         'password': password,
       },
     );
+  }
+
+  Future<void> logout() async {
+    await auth.signOut();
   }
 }

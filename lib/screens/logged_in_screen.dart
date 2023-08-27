@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:forfun_teller/screens/shop_screen.dart';
-import 'package:forfun_teller/screens/main_screen.dart';
+import 'package:forfun_teller/screens/coffee_screen.dart';
 import 'package:forfun_teller/screens/tarot_screen.dart';
 import 'profile_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:forfun_teller/screens/notification_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoggedInScreen extends StatelessWidget {
   @override
@@ -15,8 +15,6 @@ class LoggedInScreen extends StatelessWidget {
 }
 
 class MainNavigationBar extends StatefulWidget {
-  const MainNavigationBar({Key? key}) : super(key: key);
-
   @override
   _MainNavigationBarState createState() => _MainNavigationBarState();
 }
@@ -25,7 +23,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    MainPage(),
+    CoffeePage(),
     TarotPage(),
     ProfilePage(),
     NotificationPage(),
@@ -34,6 +32,8 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
+    final user = FirebaseAuth.instance.currentUser;
+    print(user!.email);
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(

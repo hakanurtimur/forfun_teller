@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/services/provider/auth_services.dart';
+import 'package:forfun_teller/services/provider/fortune_services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class AuthScaffold extends StatelessWidget {
   final Widget childWidget;
-  String bgImage;
+  final String? bgImage;
 
   AuthScaffold({required this.childWidget, required this.bgImage});
 
@@ -14,14 +15,16 @@ class AuthScaffold extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: [
-          Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(bgImage),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
+          bgImage != null
+              ? Container(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage(bgImage!),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                )
+              : Container(),
           Container(
             height: double.infinity,
             width: double.infinity,
@@ -39,7 +42,8 @@ class AuthScaffold extends StatelessWidget {
               child: childWidget,
             ),
           ),
-          Provider.of<AuthServices>(context).isLoading
+          Provider.of<AuthServices>(context).isLoading ||
+                  Provider.of<FortuneServices>(context).isLoading
               ? Center(
                   child: Container(
                     color: Colors.black.withOpacity(0.5),

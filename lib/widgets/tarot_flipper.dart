@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
 import 'package:forfun_teller/constants.dart';
-import 'package:forfun_teller/services/provider/cloud_services.dart';
-import 'package:forfun_teller/widgets/build_bottom_sheet.dart';
+import 'package:forfun_teller/services/provider/tarot_services.dart';
+import 'package:forfun_teller/widgets/tarot_buttom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class TarotFlipper extends StatefulWidget {
@@ -72,7 +72,7 @@ class _TarotFlipperState extends State<TarotFlipper> {
         if (widget.con.state?.isFront == true) {
           widget.con.flipcard();
         }
-        var data = await Provider.of<CloudServices>(context, listen: false)
+        var data = await Provider.of<TarotServices>(context, listen: false)
             .getTarotById('bZzeUboLNUj07DyGPHSG');
         setState(() {
           imageUrl = data['imageUrl'];

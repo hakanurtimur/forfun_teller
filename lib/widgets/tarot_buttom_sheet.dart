@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forfun_teller/constants.dart';
 
 Widget buildBottomSheet(
     BuildContext context, String cardName, String cardDesc, String cardImg) {
@@ -6,16 +7,25 @@ Widget buildBottomSheet(
     child: Stack(
       children: [
         Container(
-          color: Colors.black.withOpacity(0.7),
+          decoration: kBigModalBoxDecoration(context),
           height: MediaQuery.of(context).size.height * 0.9,
           width: MediaQuery.of(context).size.width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              Text(
-                'Günün Kartı: $cardName',
-                textAlign: TextAlign.center,
-                style: const TextStyle(fontSize: 30, color: Colors.white),
+              Column(
+                children: [
+                  const Text(
+                    'Günün Kartı',
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 30, color: Colors.white),
+                  ),
+                  Text(
+                    cardName,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(fontSize: 30, color: Colors.white),
+                  ),
+                ],
               ),
               SizedBox(
                 width: 200,

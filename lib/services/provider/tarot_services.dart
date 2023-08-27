@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class CloudServices extends ChangeNotifier {
+class TarotServices extends ChangeNotifier {
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;

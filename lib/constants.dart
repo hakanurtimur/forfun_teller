@@ -3,9 +3,9 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 
 const ColorScheme kMainColorScheme = ColorScheme.dark(
   primary: Color(0xFF592538),
-  secondary: Color(0xFFD9736A),
+  secondary: Color(0xFFDC9F20),
   background: Color(0xFFA64153),
-  surface: Color(0xFFD9736A),
+  surface: Color(0xFFDC9F20),
   onPrimary: Colors.white,
   onSecondary: Colors.black,
   onBackground: Colors.white,
@@ -43,7 +43,7 @@ const InputDecoration kInputDecorationStyle = InputDecoration(
 ); // copy with text
 
 final Color kSuccessColor = Colors.black.withOpacity(0.5);
-final Color kErrorColor = const Color(0xFF592538).withOpacity(0.5);
+final Color kErrorColor = Colors.red.withOpacity(1);
 const Color kInfoColor = Color(0xFFD9736A);
 
 void customToast({
@@ -66,4 +66,44 @@ void customToast({
     fullWidth: true,
     isHideKeyboard: true,
   );
+}
+
+final ButtonStyle kOutlinedButtonStyle = OutlinedButton.styleFrom(
+  foregroundColor: Colors.white,
+  backgroundColor: Colors.transparent,
+  shape: RoundedRectangleBorder(
+    borderRadius: BorderRadius.circular(20),
+    side: const BorderSide(color: Colors.white, width: 2),
+  ),
+);
+
+BoxDecoration kBigModalBoxDecoration(BuildContext context) {
+  return BoxDecoration(
+    border: null,
+    gradient: LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [
+        Theme.of(context).colorScheme.primary,
+        Theme.of(context).colorScheme.background,
+      ],
+    ),
+    borderRadius: const BorderRadius.only(
+      topLeft: Radius.circular(20),
+      topRight: Radius.circular(20),
+    ),
+  );
+}
+
+class PadderBox extends StatelessWidget {
+  const PadderBox({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: MediaQuery.of(context).size.height * 0.03,
+    );
+  }
 }

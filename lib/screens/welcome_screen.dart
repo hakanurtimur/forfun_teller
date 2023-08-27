@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter_onboarding_slider/flutter_onboarding_slider.dart';
+import 'package:forfun_teller/services/provider/auth_services.dart';
+import 'package:provider/provider.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({

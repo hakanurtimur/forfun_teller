@@ -1,15 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
+import 'package:forfun_teller/screens/carousel_screen.dart';
+import 'package:forfun_teller/screens/fortune_form_screen.dart';
 import 'package:forfun_teller/screens/logged_in_screen.dart';
-import 'package:forfun_teller/services/provider/cloud_services.dart';
+import 'package:forfun_teller/screens/update_profile_screen.dart';
+import 'package:forfun_teller/services/provider/tarot_services.dart';
+import 'package:forfun_teller/services/provider/fortune_services.dart';
+import 'package:forfun_teller/services/provider/storage_services.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/login_screen.dart';
 import 'package:provider/provider.dart';
 import 'services/provider/auth_services.dart';
 import 'screens/profile_screen.dart';
-import 'screens/main_screen.dart';
+import 'screens/coffee_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +32,13 @@ class MyApp extends StatelessWidget {
           create: (context) => AuthServices(),
         ),
         ChangeNotifierProvider(
-          create: (context) => CloudServices(),
+          create: (context) => TarotServices(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => FortuneServices(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => StorageService(),
         ),
       ],
       child: MaterialApp(
@@ -43,7 +54,10 @@ class MyApp extends StatelessWidget {
           '/login': (context) => LoginPage(),
           '/logged': (context) => LoggedInScreen(),
           '/profile': (context) => ProfilePage(),
-          '/main': (context) => MainPage(),
+          '/main': (context) => CoffeePage(),
+          '/carousel': (context) => const CarouselScreen(),
+          '/fortune_form': (context) => const FortuneFormPage(),
+          '/update_profile': (context) => UpdateProfilePage(),
         },
       ),
     );

@@ -10,6 +10,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    print('dsipose çalıştı');
+  }
+
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? email;
@@ -42,13 +49,10 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Hero(
-              tag: 'icon',
-              child: Image(
-                width: 100,
-                height: 100,
-                image: AssetImage('images/icon.png'),
-              ),
+            Image(
+              width: 100,
+              height: 100,
+              image: AssetImage('images/icon.png'),
             ),
             const SizedBox(height: 50),
             LoginFormWidget(
