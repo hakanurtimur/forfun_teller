@@ -20,7 +20,7 @@ class MainNavigationBar extends StatefulWidget {
 }
 
 class _MainNavigationBarState extends State<MainNavigationBar> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
 
   final List<Widget> _pages = [
     CoffeePage(),
@@ -59,7 +59,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
           height: 60,
           activeColor: Theme.of(context).colorScheme.onBackground,
           backgroundColor: Colors.black.withOpacity(0.7),
-          initialActiveIndex: 0,
+          initialActiveIndex: 2,
           style: TabStyle.react,
           items: const [
             TabItem(

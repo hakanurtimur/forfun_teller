@@ -12,3 +12,6 @@
 -> şifreyi değiştirme ekle
 -> validate fonksiyonlarına bir bak
 -> şifremi unuttum muhabbeti
+-> storageı düzenle
+-> profil seçimöinin storagedan gelmesini sağla
+-> phsycal device test et(upload profile photo)

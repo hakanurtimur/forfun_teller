@@ -4,13 +4,12 @@ import 'package:forfun_teller/services/provider/auth_services.dart';
 import 'package:forfun_teller/widgets/inside_scaffold.dart';
 import 'package:provider/provider.dart';
 import 'package:forfun_teller/widgets/profile_info_row.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatelessWidget {
+  final currentUser = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-    if (Provider.of<AuthServices>(context, listen: false).currentUser == null) {
-      Navigator.pushNamed(context, '/login');
-    }
     return InsideScaffold(
       title: '',
       childWidget: Consumer<AuthServices>(
@@ -51,7 +50,7 @@ class ProfilePage extends StatelessWidget {
                       backgroundColor: Colors.white,
                       radius: 50,
                       backgroundImage: NetworkImage(
-                        authServices.currentUser!.photoURL ??
+                        currentUser!.photoURL ??
                             'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png',
                       ),
                     ),
@@ -59,12 +58,12 @@ class ProfilePage extends StatelessWidget {
                   ProfileInfoRow(
                     icon: Icons.person,
                     leadingText: 'İsim:',
-                    trailingText: authServices.currentUser!.displayName,
+                    trailingText: currentUser!.displayName,
                   ),
                   ProfileInfoRow(
                     icon: Icons.email,
                     leadingText: 'E-posta:',
-                    trailingText: authServices.currentUser!.email,
+                    trailingText: currentUser!.email,
                   ),
                   const ProfileInfoRow(
                     icon: Icons.coffee,
@@ -92,8 +91,17 @@ class ProfilePage extends StatelessWidget {
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
-                  OutlinedButton(
-                    style: kOutlinedButtonStyle,
+                  ElevatedButton(
+                    style: kOutlinedButtonStyle.copyWith(
+                      shape: MaterialStateProperty.all(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      backgroundColor: MaterialStateProperty.all(
+                        Colors.black,
+                      ),
+                    ),
                     onPressed: () async {
                       await Provider.of<AuthServices>(context, listen: false)
                           .logout();

@@ -3,6 +3,7 @@ import 'package:forfun_teller/services/provider/auth_services.dart';
 import 'package:forfun_teller/widgets/auth_scaffold.dart';
 import 'package:forfun_teller/widgets/update_profile_form_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class UpdateProfilePage extends StatefulWidget {
   @override
@@ -10,13 +11,7 @@ class UpdateProfilePage extends StatefulWidget {
 }
 
 class _UpdateProfilePageState extends State<UpdateProfilePage> {
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    print('dsipose çalıştı');
-  }
-
+  final currentUser = FirebaseAuth.instance.currentUser;
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   String? email;
@@ -31,8 +26,17 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
   }
 
   void onSubmit() async {
-    formKey.currentState!.validate();
+    if (!formKey.currentState!.validate()) {
+      return;
+    }
     formKey.currentState!.save();
+
+    await Provider.of<AuthServices>(context, listen: false).updateProfile(
+        email: email!,
+        name: name!,
+        context: context,
+        currentUser: currentUser!);
+    Navigator.pushReplacementNamed(context, '/logged');
   }
 
   @override
@@ -59,6 +63,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
             BackButton(
               color: Colors.white,
               onPressed: () {
+                Provider.of<AuthServices>(context, listen: false).resetImage();
                 Navigator.pop(context);
               },
             ),

@@ -2,15 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:forfun_teller/constants.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
 
 class AuthServices extends ChangeNotifier {
-  final userColection = FirebaseFirestore.instance.collection('users');
+  final userCollection = FirebaseFirestore.instance.collection('users');
   final auth = FirebaseAuth.instance;
-  final currentUser = FirebaseAuth.instance.currentUser;
 
+  bool _imagePickerLoading = false;
   bool _isLoading = false;
+  File? _selectedImage;
 
   bool get isLoading => _isLoading;
+  bool get imagePickerLoading => _imagePickerLoading;
+  File? get selectedImage => _selectedImage;
 
   void _setLoading(bool value) {
     _isLoading = value;
@@ -47,8 +53,7 @@ class AuthServices extends ChangeNotifier {
       required BuildContext context}) async {
     _setLoading(true);
     try {
-      final UserCredential userCredential = await auth
-          .signInWithEmailAndPassword(email: email, password: password);
+      await auth.signInWithEmailAndPassword(email: email, password: password);
       customToast(
           context: context,
           msg: 'Giriş başarılı',
@@ -66,7 +71,7 @@ class AuthServices extends ChangeNotifier {
       {required String email,
       required String password,
       required String uid}) async {
-    await userColection.doc(uid).set(
+    await userCollection.doc(uid).set(
       {
         'email': email,
         'password': password,
@@ -76,5 +81,73 @@ class AuthServices extends ChangeNotifier {
 
   Future<void> logout() async {
     await auth.signOut();
+  }
+
+  Future<void> updateProfile(
+      {required String name,
+      required String email,
+      required context,
+      required User currentUser}) async {
+    _setLoading(true);
+    try {
+      String? photoURL = currentUser.photoURL;
+      if (_selectedImage != null) {
+        photoURL = await _imageUploader(currentUser);
+      }
+      await currentUser.updateDisplayName(name);
+      await currentUser.updateEmail(email);
+      await currentUser.updatePhotoURL(photoURL);
+      customToast(
+          msg: 'Profil güncellendi',
+          backgroundColor: kSuccessColor,
+          context: context);
+    } on FirebaseAuthException catch (e) {
+      customToast(
+          msg: e.message!, backgroundColor: kErrorColor, context: context);
+    } finally {
+      resetImage();
+      _setLoading(false);
+    }
+    notifyListeners();
+  }
+
+  Future<void> _captureNewProfileImage(source, context) async {
+    _imagePickerLoading = true;
+    try {
+      final ImagePicker picker = ImagePicker();
+      final image = await picker.pickImage(source: source);
+      if (image != null) {
+        _selectedImage = File(image.path);
+      }
+    } catch (e) {
+      customToast(
+          msg: 'Fotoğraf yüklenirken bir hata oluştu.',
+          context: context,
+          backgroundColor: kErrorColor);
+    }
+    _imagePickerLoading = false;
+    notifyListeners();
+  }
+
+  Future<void> captureImageFromGallery(context) async {
+    await _captureNewProfileImage(ImageSource.gallery, context);
+  }
+
+  Future<void> captureImageFromCamera(context) async {
+    await _captureNewProfileImage(ImageSource.camera, context);
+  }
+
+  final storage = FirebaseStorage.instance;
+
+  Future<String?> _imageUploader(user) async {
+    final file =
+        await storage.ref('/images/${user.uid}').putFile(_selectedImage!);
+    final url = await file.ref.getDownloadURL();
+    return url;
+  }
+
+  void resetImage() {
+    _selectedImage = null;
+    notifyListeners();
   }
 }

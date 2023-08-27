@@ -26,10 +26,10 @@ class ProfileInfoRow extends StatelessWidget {
           ],
         ),
         borderRadius: BorderRadius.circular(10),
-        boxShadow: const [
+        boxShadow: [
           BoxShadow(
-            color: Colors.black,
-            blurRadius: 10,
+            color: Colors.black.withOpacity(0.3),
+            blurRadius: 2,
             offset: Offset(0, 10),
           ),
         ],
