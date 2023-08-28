@@ -18,3 +18,4 @@
 -> user updateleri ve vs için kullanıcı veri tiplerini ayarla
 -> contextleri asyncların dışına çıkar
 -> widgetları mantıksal olarak dosyalarına ayır
+-> fortune gittikten sonra geri dönüşü düzenle

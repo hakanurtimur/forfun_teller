@@ -161,7 +161,7 @@ class FortuneFormWidget extends StatelessWidget {
                             const Row(
                               crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Icon(FontAwesomeIcons.birthdayCake,
+                                Icon(FontAwesomeIcons.cakeCandles,
                                     color: Colors.white),
                                 SizedBox(width: 12),
                                 Text(

@@ -95,6 +95,15 @@ class FortuneServices extends ChangeNotifier {
     try {
       // await storage.ref('/images/').putFile(_selectedImage1!);
       final fortuneId = Uuid().v4();
+      await _updateUsersFortunes(
+          uid: uid, fortuneId: fortuneId, context: context);
+      customToast(
+          context: context,
+          msg:
+              'Falınız başarıyla gönderildi, 30 dakika içerisinde gelen kutunuzdan cevabınızı alabilirsiniz.',
+          backgroundColor: kSuccessColor);
+      Navigator.pushNamed(context, '/logged');
+      ;
       await fortuneCollection.doc(fortuneId).set(
         {
           'ownerAccountId': currentUser!.uid,
@@ -106,14 +115,6 @@ class FortuneServices extends ChangeNotifier {
           'status': 'pending',
         },
       );
-      await _updateUsersFortunes(
-          uid: uid, fortuneId: fortuneId, context: context);
-      customToast(
-          context: context,
-          msg:
-              'Falınız başarıyla gönderildi, 30 dakika içerisinde gelen kutunuzdan cevabınızı alabilirsiniz.',
-          backgroundColor: kSuccessColor);
-      Navigator.pushNamed(context, '/logged');
       resetImages();
     } on FirebaseException catch (e) {
       customToast(
@@ -142,18 +143,20 @@ class FortuneServices extends ChangeNotifier {
           barrierDismissible: false,
           context: context,
           builder: (context) => NotEnaughDialog());
+      resetImages();
       throw Exception('Yeterli elmasınız bulunmamaktadır.');
+    } else {
+      var fortunes = (snapshot.data() as Map)['fortunes'];
+      fortunes.add(fortuneId);
+      await userCollection.doc(uid).update(
+        {'fortunes': fortunes, 'diamondAmount': FieldValue.increment(-1)},
+      );
     }
-    var fortunes = (snapshot.data() as Map)['fortunes'];
-    fortunes.add(fortuneId);
-    await userCollection.doc(uid).update(
-      {'fortunes': fortunes, 'diamondAmount': FieldValue.increment(-1)},
-    );
   }
 }
 
 class NotEnaughDialog extends StatelessWidget {
-  const NotEnaughDialog({
+  NotEnaughDialog({
     super.key,
   });
 
