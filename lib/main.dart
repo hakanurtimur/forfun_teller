@@ -7,7 +7,7 @@ import 'package:forfun_teller/screens/logged_in_screen.dart';
 import 'package:forfun_teller/screens/update_profile_screen.dart';
 import 'package:forfun_teller/services/provider/tarot_services.dart';
 import 'package:forfun_teller/services/provider/fortune_services.dart';
-import 'package:forfun_teller/services/provider/storage_services.dart';
+import 'package:forfun_teller/services/provider/diamond_services.dart';
 import 'screens/welcome_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/login_screen.dart';
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
           create: (context) => FortuneServices(),
         ),
         ChangeNotifierProvider(
-          create: (context) => StorageService(),
+          create: (context) => DiamondService(),
         ),
       ],
       child: MaterialApp(

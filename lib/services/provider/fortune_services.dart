@@ -5,6 +5,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:uuid/uuid.dart';
 
 class FortuneServices extends ChangeNotifier {
   // private variables
@@ -87,12 +88,14 @@ class FortuneServices extends ChangeNotifier {
     required String relationship,
     required String gender,
     required BuildContext context,
+    required String uid,
   }) async {
     _isLoading = true;
     if (!imageCheck()) return;
     try {
-      await storage.ref('/images/').putFile(_selectedImage1!);
-      await fortuneCollection.doc().set(
+      // await storage.ref('/images/').putFile(_selectedImage1!);
+      final fortuneId = Uuid().v4();
+      await fortuneCollection.doc(fortuneId).set(
         {
           'ownerAccountId': currentUser!.uid,
           'bornDate': bornDate,
@@ -100,8 +103,10 @@ class FortuneServices extends ChangeNotifier {
           'gender': gender,
           'relationship': relationship,
           'createdAt': DateTime.now(),
+          'status': 'pending',
         },
       );
+      await _updateUsersFortunes(uid: uid, fortuneId: fortuneId);
       customToast(
           context: context,
           msg:
@@ -113,6 +118,7 @@ class FortuneServices extends ChangeNotifier {
           msg: e.message!, context: context, backgroundColor: kErrorColor);
     } finally {
       _isLoading = false;
+      resetImages();
     }
     notifyListeners();
   }
@@ -122,17 +128,19 @@ class FortuneServices extends ChangeNotifier {
     if (!imageCheck()) return;
     await storage.ref('/images/').putFile(_selectedImage1!);
   }
-}
 
-// rules_version = '2';
-//
-// // Craft rules based on data in your Firestore database
-// // allow write: if firestore.get(
-// //    /databases/(default)/documents/users/$(request.auth.uid)).data.isAdmin;
-// service firebase.storage {
-// match /b/{bucket}/o {
-// match /{allPaths=**} {
-// allow read, write: if true;
-// }
-// }
-// }
+  Future<void> _updateUsersFortunes(
+      {required String uid, required String fortuneId}) async {
+    final userCollection = FirebaseFirestore.instance.collection('users');
+    final DocumentSnapshot snapshot = await userCollection.doc(uid).get();
+    var diamondAmount = (snapshot.data() as Map)['diamondAmount'];
+    if (diamondAmount < 1) {
+      throw Exception('Yeterli elmasınız bulunmamaktadır.');
+    }
+    var fortunes = (snapshot.data() as Map)['fortunes'];
+    fortunes.add(fortuneId);
+    await userCollection.doc(uid).update(
+      {'fortunes': fortunes, 'diamondAmount': FieldValue.increment(-1)},
+    );
+  }
+}

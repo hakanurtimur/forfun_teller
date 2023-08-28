@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/services/provider/fortune_services.dart';
-import 'package:forfun_teller/services/provider/storage_services.dart';
 import 'package:forfun_teller/widgets/auth_scaffold.dart';
 import 'package:forfun_teller/widgets/fortune_form_widget.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +30,7 @@ class _FortuneFormPageState extends State<FortuneFormPage> {
   ];
 
   Future<void> printingValues(BuildContext inContext) async {
+    User? currentUser = FirebaseAuth.instance.currentUser;
     formKey.currentState!.validate();
     formKey.currentState!.save();
     if (_name.isEmpty) {
@@ -40,6 +41,7 @@ class _FortuneFormPageState extends State<FortuneFormPage> {
         bornDate: _date,
         ownerName: _name,
         relationship: _selectedRelationshipText,
+        uid: currentUser!.uid,
         gender: _gender);
   }
 

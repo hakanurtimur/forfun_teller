@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:forfun_teller/screens/shop_screen.dart';
 import 'package:forfun_teller/screens/coffee_screen.dart';
 import 'package:forfun_teller/screens/tarot_screen.dart';
+import 'package:forfun_teller/services/provider/diamond_services.dart';
 import 'profile_screen.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:forfun_teller/screens/notification_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
 
 class LoggedInScreen extends StatelessWidget {
   @override
@@ -20,7 +22,9 @@ class MainNavigationBar extends StatefulWidget {
 }
 
 class _MainNavigationBarState extends State<MainNavigationBar> {
+  final currentUser = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 2;
+  int? _diamondAmount; // Yeni değişken
 
   final List<Widget> _pages = [
     CoffeePage(),
@@ -31,9 +35,17 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
   ];
 
   @override
+  void initState() {
+    super.initState();
+    Provider.of<DiamondService>(context, listen: false)
+        .getDiamondAmount(currentUser!.uid)
+        .then((value) => setState(() {
+              _diamondAmount = value;
+            }));
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final user = FirebaseAuth.instance.currentUser;
-    print(user!.email);
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
@@ -44,6 +56,13 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
       ),
       child: Scaffold(
         appBar: AppBar(
+          leading: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text('$_diamondAmount', style: TextStyle(fontSize: 19)),
+                const Icon(Icons.diamond, size: 19),
+              ]),
           title: Image.asset('images/logo.png', height: 100),
           centerTitle: true,
           backgroundColor: Colors.transparent,

@@ -13,7 +13,7 @@ class AuthServices extends ChangeNotifier {
   bool _imagePickerLoading = false;
   bool _isLoading = false;
   File? _selectedImage;
-
+  final storage = FirebaseStorage.instance;
   bool get isLoading => _isLoading;
   bool get imagePickerLoading => _imagePickerLoading;
   File? get selectedImage => _selectedImage;
@@ -23,6 +23,8 @@ class AuthServices extends ChangeNotifier {
     notifyListeners();
   }
 
+  // auth functions
+
   Future<void> signUpWithEmail(
       {required String email,
       required String password,
@@ -31,7 +33,7 @@ class AuthServices extends ChangeNotifier {
     try {
       final UserCredential userCredential = await auth
           .createUserWithEmailAndPassword(email: email, password: password);
-      await _registration(
+      await _registrationForFirestore(
           email: email, password: password, uid: userCredential.user!.uid);
 
       customToast(
@@ -67,22 +69,6 @@ class AuthServices extends ChangeNotifier {
     }
   }
 
-  Future<void> _registration(
-      {required String email,
-      required String password,
-      required String uid}) async {
-    await userCollection.doc(uid).set(
-      {
-        'email': email,
-        'password': password,
-      },
-    );
-  }
-
-  Future<void> logout() async {
-    await auth.signOut();
-  }
-
   Future<void> updateProfile(
       {required String name,
       required String email,
@@ -97,6 +83,11 @@ class AuthServices extends ChangeNotifier {
       await currentUser.updateDisplayName(name);
       await currentUser.updateEmail(email);
       await currentUser.updatePhotoURL(photoURL);
+      await _updateUserForFirestore(
+          email: email,
+          uid: currentUser.uid,
+          userName: name,
+          photoURL: photoURL);
       customToast(
           msg: 'Profil güncellendi',
           backgroundColor: kSuccessColor,
@@ -110,6 +101,45 @@ class AuthServices extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  Future<void> logout() async {
+    await auth.signOut();
+  }
+
+  // firestore functions
+
+  Future<void> _registrationForFirestore(
+      {required String email,
+      required String password,
+      required String uid}) async {
+    await userCollection.doc(uid).set(
+      {
+        'email': email,
+        'password': password,
+        'userName': '',
+        'photoURL': '',
+        'fortunes': [],
+        'diamondAmount': 0,
+        'tarotCardAmount': 0,
+        'submittedUser': [],
+      },
+    );
+  }
+
+  Future<void> _updateUserForFirestore({
+    required String email,
+    required String uid,
+    required String userName,
+    required String? photoURL,
+  }) async {
+    await userCollection.doc(uid).update({
+      'email': email,
+      'userName': userName,
+      'photoURL': photoURL,
+    });
+  }
+
+  // image picker functions
 
   Future<void> _captureNewProfileImage(source, context) async {
     _imagePickerLoading = true;
@@ -136,8 +166,6 @@ class AuthServices extends ChangeNotifier {
   Future<void> captureImageFromCamera(context) async {
     await _captureNewProfileImage(ImageSource.camera, context);
   }
-
-  final storage = FirebaseStorage.instance;
 
   Future<String?> _imageUploader(user) async {
     final file =
