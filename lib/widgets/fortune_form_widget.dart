@@ -282,7 +282,53 @@ class FortuneFormWidget extends StatelessWidget {
           OutlinedButton(
             style: kOutlinedButtonStyle,
             onPressed: () {
-              onSubmit();
+              showModalBottomSheet(
+                backgroundColor: Colors.transparent,
+                context: context,
+                builder: (context) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.3,
+                    width: MediaQuery.of(context).size.width,
+                    child: Container(
+                        decoration: BoxDecoration(
+                          gradient: LinearGradient(
+                            colors: [
+                              Theme.of(context).colorScheme.primary,
+                              Colors.black
+                            ],
+                            begin: Alignment.bottomLeft,
+                            end: Alignment.topRight,
+                          ),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(20),
+                            topRight: Radius.circular(20),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text('Bu yolculuğun bedeli 1 Forfun Diamond.'),
+                            PadderBox(),
+                            OutlinedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                                onSubmit();
+                              },
+                              child: Text('Onayla'),
+                              style: kOutlinedButtonStyle,
+                            ),
+                            OutlinedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text('Vazgeç'),
+                              style: kOutlinedButtonStyle,
+                            )
+                          ],
+                        )),
+                  );
+                },
+              );
             },
             child: const Text(
               'Gönder',

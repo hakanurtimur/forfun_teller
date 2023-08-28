@@ -29,7 +29,7 @@ class _FortuneFormPageState extends State<FortuneFormPage> {
     'Flörtü var',
   ];
 
-  Future<void> printingValues(BuildContext inContext) async {
+  Future<void> onSubmit(BuildContext inContext) async {
     User? currentUser = FirebaseAuth.instance.currentUser;
     formKey.currentState!.validate();
     formKey.currentState!.save();
@@ -79,7 +79,7 @@ class _FortuneFormPageState extends State<FortuneFormPage> {
                 },
                 selectedDate: _date,
                 onSubmit: () async {
-                  await printingValues(context);
+                  await onSubmit(context);
                 }),
           ),
           const PositionedBackButton(
