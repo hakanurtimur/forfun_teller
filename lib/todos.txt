@@ -15,3 +15,6 @@
 -> storageı düzenle
 -> profil seçimöinin storagedan gelmesini sağla
 -> phsycal device test et(upload profile photo)
+-> user updateleri ve vs için kullanıcı veri tiplerini ayarla
+-> contextleri asyncların dışına çıkar
+-> widgetları mantıksal olarak dosyalarına ayır

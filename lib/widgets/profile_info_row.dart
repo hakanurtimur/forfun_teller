@@ -8,7 +8,7 @@ class ProfileInfoRow extends StatelessWidget {
     super.key,
     required this.leadingText,
     required this.trailingText,
-    this.icon,
+    required this.icon,
   });
 
   @override

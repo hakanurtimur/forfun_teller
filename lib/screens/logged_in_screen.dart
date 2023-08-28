@@ -79,7 +79,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
               title: 'Bildirimler',
             ),
             TabItem(
-              icon: Icon(Icons.shopping_cart),
+              icon: Icon(Icons.diamond),
               title: 'Mağaza',
             ),
           ],
