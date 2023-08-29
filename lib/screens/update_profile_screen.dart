@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/services/provider/auth_services.dart';
-import 'package:forfun_teller/widgets/auth_scaffold.dart';
-import 'package:forfun_teller/widgets/update_profile_form_widget.dart';
+import 'package:forfun_teller/widgets/scaffolds/imaged_scaffold.dart';
+import 'package:forfun_teller/widgets/form-widgets/update_profile_form_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -41,7 +41,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthScaffold(
+    return ImagedScaffold(
       bgImage: null,
       childWidget: SingleChildScrollView(
         child: Stack(

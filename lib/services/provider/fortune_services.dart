@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
+import 'package:forfun_teller/screens/logged_in_screen.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -107,11 +108,17 @@ class FortuneServices extends ChangeNotifier {
           msg:
               'Falınız başarıyla gönderildi, 30 dakika içerisinde gelen kutunuzdan cevabınızı alabilirsiniz.',
           backgroundColor: kSuccessColor);
-      Navigator.pushNamed(context, '/logged');
-      ;
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) {
+          return LoggedInScreen(
+            initialPageIndex: 3,
+          );
+        }),
+      );
       await fortuneCollection.doc(fortuneId).set(
         {
-          'ownerAccountId': currentUser!.uid,
+          'ownerAccountId': uid,
           'bornDate': bornDate,
           'ownerName': ownerName,
           'gender': gender,

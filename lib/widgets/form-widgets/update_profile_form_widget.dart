@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
-import 'package:forfun_teller/widgets/profile_image_bottom_sheet.dart';
+import 'package:forfun_teller/widgets/profile-widgets/profile_image_bottom_sheet.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:forfun_teller/services/provider/auth_services.dart';
 import 'package:provider/provider.dart';

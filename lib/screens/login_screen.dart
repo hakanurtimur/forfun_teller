@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/services/provider/auth_services.dart';
-import 'package:forfun_teller/widgets/auth_scaffold.dart';
-import 'package:forfun_teller/widgets/login_form.dart';
+import 'package:forfun_teller/widgets/scaffolds/imaged_scaffold.dart';
+import 'package:forfun_teller/widgets/form-widgets/login_form.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -43,7 +43,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthScaffold(
+    return ImagedScaffold(
       bgImage: 'images/welcome_bg2.jpg',
       childWidget: SingleChildScrollView(
         child: Column(

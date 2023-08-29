@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:forfun_teller/screens/fortune_form_screen.dart';
 import 'package:forfun_teller/services/provider/fortune_services.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:forfun_teller/widgets/auth_scaffold.dart';
-import 'package:forfun_teller/widgets/carousel_item.dart';
+import 'package:forfun_teller/widgets/scaffolds/imaged_scaffold.dart';
+import 'package:forfun_teller/widgets/carousel-widgets//carousel_item.dart';
 import 'package:provider/provider.dart';
-import 'package:forfun_teller/widgets/carousel_gestures.dart';
+import 'package:forfun_teller/widgets/carousel-widgets/carousel_gestures.dart';
 import 'package:forfun_teller/constants.dart';
-import 'package:page_transition/page_transition.dart';
-import 'package:forfun_teller/widgets/positioned_back_button.dart';
+import 'package:forfun_teller/widgets/buttons/positioned_back_button.dart';
 
 class CarouselScreen extends StatefulWidget {
   const CarouselScreen({super.key});
@@ -47,7 +45,7 @@ class _CarouselScreenState extends State<CarouselScreen> {
     return AnimatedOpacity(
       opacity: isScreenLoaded ? 1 : 0,
       duration: const Duration(milliseconds: 400),
-      child: AuthScaffold(
+      child: ImagedScaffold(
         childWidget: AnimatedOpacity(
           opacity: fadedOut ? 1 : 0,
           duration: const Duration(milliseconds: 250),

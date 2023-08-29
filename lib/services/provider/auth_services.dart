@@ -40,7 +40,7 @@ class AuthServices extends ChangeNotifier {
           context: context,
           msg: 'Kayıt başarılı',
           backgroundColor: kSuccessColor);
-      Navigator.pushNamed(context, '/logged');
+      Navigator.pushNamed(context, '/update_profile');
     } on FirebaseAuthException catch (e) {
       customToast(
           msg: e.message!, context: context, backgroundColor: kErrorColor);

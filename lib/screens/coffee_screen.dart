@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:forfun_teller/widgets/inside_scaffold.dart';
+import 'package:forfun_teller/widgets/scaffolds/inside_scaffold.dart';
 import 'package:forfun_teller/constants.dart';
 import 'package:forfun_teller/screens/carousel_screen.dart';
 import 'package:page_transition/page_transition.dart';

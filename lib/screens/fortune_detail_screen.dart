@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
-import 'package:forfun_teller/widgets/auth_scaffold.dart';
+import 'package:forfun_teller/widgets/scaffolds/imaged_scaffold.dart';
 
 class FortuneDetailPage extends StatelessWidget {
   final String? fortuneText;
@@ -9,7 +9,7 @@ class FortuneDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AuthScaffold(
+    return ImagedScaffold(
       bgImage: 'images/fortune_detail_bg.jpg',
       childWidget: Stack(
         children: [

@@ -3,9 +3,9 @@ import 'package:forfun_teller/constants.dart';
 import 'package:forfun_teller/services/provider/auth_services.dart';
 import 'package:forfun_teller/services/provider/diamond_services.dart';
 import 'package:forfun_teller/services/provider/fortune_services.dart';
-import 'package:forfun_teller/widgets/inside_scaffold.dart';
+import 'package:forfun_teller/widgets/scaffolds/inside_scaffold.dart';
 import 'package:provider/provider.dart';
-import 'package:forfun_teller/widgets/profile_info_row.dart';
+import 'package:forfun_teller/widgets/profile-widgets/profile_info_row.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {

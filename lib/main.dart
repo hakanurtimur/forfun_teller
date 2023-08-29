@@ -13,7 +13,7 @@ import 'screens/welcome_screen.dart';
 import 'screens/signup_screen.dart';
 import 'screens/login_screen.dart';
 import 'package:provider/provider.dart';
-import 'services/provider/auth_services.dart';
+import 'package:forfun_teller/services/provider/auth_services.dart';
 import 'screens/profile_screen.dart';
 import 'screens/coffee_screen.dart';
 

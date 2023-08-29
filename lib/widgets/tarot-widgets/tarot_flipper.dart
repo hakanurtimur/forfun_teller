@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
-import 'package:forfun_teller/constants.dart';
 import 'package:forfun_teller/services/provider/tarot_services.dart';
-import 'package:forfun_teller/widgets/tarot_buttom_sheet.dart';
+import 'package:forfun_teller/widgets/tarot-widgets/tarot_buttom_sheet.dart';
 import 'package:provider/provider.dart';
 
 class TarotFlipper extends StatefulWidget {

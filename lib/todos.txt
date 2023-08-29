@@ -3,7 +3,6 @@
 -> Width ve heighleri media query ile sağla
 -> image seçimlerinin back buttonlarını düzenle
 -> localizasyonu düzenle
--> kayıtlı kullanıcılar olsun
 -> storage ı planla
 -> bildirimleri hazırla
 -> telefonların her boyutuna uygun hale getir // paddder box
@@ -11,7 +10,6 @@
 -> şifreyi değiştirme ekle
 -> şifremi unuttum muhabbeti
 -> tarot bölümüyle biraz oyna
--> customToastu modala çevirme // maybe vaktin kalırsa
 -> elmasların updateinde stream gerekir mi ? // maybe vaktin kalırsa
 
 // perşembe
@@ -19,9 +17,7 @@
 -> storageı düzenle
 -> phsycal device test et(upload profile photo)
 -> contextleri asyncların dışına çıkar
--> widgetları mantıksal olarak dosyalarına ayır
--> fortune gittikten sonra geri dönüşü düzenle
---> bazı inputların büyük olması durumunda flexlerin davranışını düzenle
+-> bazı inputların büyük olması durumunda flexlerin davranışını düzenle
 -> sayfa sayfa kontrol et ve düzenle
 -> profile app barda olsun
 -> button disabled incelemeleri // genel olarak isLoading statelerini kontrol et providerlarda
@@ -31,5 +27,3 @@ etmek gerekiyor nasıl çözülür
 // cuma
 APK YAP
 
-// bugün
---> HOME PAGE CONTROLLERINI YAKALA VE BİR FONKSİYONLA BİRLEŞTİR

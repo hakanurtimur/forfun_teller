@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:forfun_teller/widgets/profile_bottom_sheet_buttons.dart';
+import 'package:forfun_teller/widgets/profile-widgets/profile_bottom_sheet_buttons.dart';
 
 Widget profileImageBottomSheet(BuildContext context) {
   return SingleChildScrollView(

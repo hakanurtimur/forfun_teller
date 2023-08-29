@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:forfun_teller/services/provider/fortune_services.dart';
-import 'package:forfun_teller/widgets/inside_scaffold.dart';
+import 'package:forfun_teller/widgets/scaffolds/inside_scaffold.dart';
 import 'package:forfun_teller/screens/fortune_detail_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -22,50 +22,56 @@ class NotificationPage extends StatelessWidget {
           return Center(child: Text('Hata oluştu: ${snapshot.error}'));
         } else {
           List<Map<String, dynamic>>? successFortunes = snapshot.data;
-
-          return InsideScaffold(
-            childWidget: Container(
-              padding:
-                  EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
-              child: successFortunes != null
-                  ? ListView.builder(
-                      itemCount: successFortunes.length,
-                      itemBuilder: (context, index) {
-                        return Column(
-                          children: [
-                            ListTile(
-                              trailing: TextButton(
-                                onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                    return FortuneDetailPage(
-                                      fortuneTitle: successFortunes[index]
-                                          ['title'],
-                                      fortuneText: successFortunes[index]
-                                          ['fortuneText'],
-                                    );
-                                  }));
-                                },
-                                child: Icon(Icons.arrow_forward_ios,
-                                    color: Colors.white),
+          if (successFortunes!.isEmpty) {
+            return InsideScaffold(
+              childWidget: Center(child: Text('Henüz falınız yok')),
+              title: 'Fallarınız',
+            );
+          } else {
+            return InsideScaffold(
+              childWidget: Container(
+                padding:
+                    EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
+                child: successFortunes != null
+                    ? ListView.builder(
+                        itemCount: successFortunes.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ListTile(
+                                trailing: TextButton(
+                                  onPressed: () {
+                                    Navigator.push(context,
+                                        MaterialPageRoute(builder: (context) {
+                                      return FortuneDetailPage(
+                                        fortuneTitle: successFortunes[index]
+                                            ['title'],
+                                        fortuneText: successFortunes[index]
+                                            ['fortuneText'],
+                                      );
+                                    }));
+                                  },
+                                  child: Icon(Icons.arrow_forward_ios,
+                                      color: Colors.white),
+                                ),
+                                leading: Icon(Icons.notifications),
+                                title: Column(
+                                  children: [
+                                    Text(successFortunes[index]['createdAt'] +
+                                        ' saatinde gönderdiğiniz fal geldi.'),
+                                  ],
+                                ),
                               ),
-                              leading: Icon(Icons.notifications),
-                              title: Column(
-                                children: [
-                                  Text(successFortunes[index]['createdAt'] +
-                                      ' saatinde gönderdiğiniz fal geldi.'),
-                                ],
-                              ),
-                            ),
-                            Divider(),
-                          ],
-                        );
-                      },
-                    )
-                  : Center(child: CircularProgressIndicator()),
-            ),
-            title: 'Fallarınız',
-          );
+                              Divider(),
+                            ],
+                          );
+                        },
+                      )
+                    : Center(child: CircularProgressIndicator()),
+              ),
+              title: 'Fallarınız',
+            );
+          }
         }
       },
     );

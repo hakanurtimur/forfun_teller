@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
-import 'package:forfun_teller/widgets/inside_scaffold.dart';
+import 'package:forfun_teller/widgets/scaffolds/inside_scaffold.dart';
 import 'package:forfun_teller/widgets/shop_card.dart';
 
 class ShopPage extends StatelessWidget {

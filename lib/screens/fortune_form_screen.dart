@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/services/provider/fortune_services.dart';
-import 'package:forfun_teller/widgets/auth_scaffold.dart';
-import 'package:forfun_teller/widgets/fortune_form_widget.dart';
+import 'package:forfun_teller/widgets/scaffolds/imaged_scaffold.dart';
+import 'package:forfun_teller/widgets/form-widgets/fortune_form_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:forfun_teller/widgets/positioned_back_button.dart';
+import 'package:forfun_teller/widgets/buttons/positioned_back_button.dart';
 
 class FortuneFormPage extends StatefulWidget {
   const FortuneFormPage({super.key});
@@ -47,7 +47,7 @@ class _FortuneFormPageState extends State<FortuneFormPage> {
 
   @override
   Widget build(BuildContext context) {
-    return AuthScaffold(
+    return ImagedScaffold(
       childWidget: Stack(
         children: [
           SingleChildScrollView(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
+import 'package:forfun_teller/screens/logged_in_screen.dart';
 
 class NotEnaughDialog extends StatelessWidget {
   NotEnaughDialog({
@@ -36,7 +37,14 @@ class NotEnaughDialog extends StatelessWidget {
               PadderBox(),
               OutlinedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/logged');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return LoggedInScreen(
+                        initialPageIndex: 4,
+                      );
+                    }),
+                  );
                 },
                 child: Text('Mağazaya git',
                     style: TextStyle(
@@ -47,7 +55,14 @@ class NotEnaughDialog extends StatelessWidget {
               ),
               OutlinedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, '/logged');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) {
+                      return LoggedInScreen(
+                        initialPageIndex: 0,
+                      );
+                    }),
+                  );
                 },
                 child: Text('Ana Sayfaya Dön',
                     style: TextStyle(

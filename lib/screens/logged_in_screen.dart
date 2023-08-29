@@ -10,20 +10,26 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class LoggedInScreen extends StatelessWidget {
+  final int initialPageIndex;
+  LoggedInScreen({this.initialPageIndex = 2});
   @override
   Widget build(BuildContext context) {
-    return MainNavigationBar();
+    return MainNavigationBar(
+      initialPageIndex: initialPageIndex,
+    );
   }
 }
 
 class MainNavigationBar extends StatefulWidget {
+  final int initialPageIndex;
+  MainNavigationBar({this.initialPageIndex = 2});
   @override
   _MainNavigationBarState createState() => _MainNavigationBarState();
 }
 
 class _MainNavigationBarState extends State<MainNavigationBar> {
   final currentUser = FirebaseAuth.instance.currentUser;
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
   int? _diamondAmount;
   List<dynamic> successFortunes = [];
 
@@ -43,6 +49,9 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
         .then((value) => setState(() {
               _diamondAmount = value;
             }));
+    setState(() {
+      _selectedIndex = widget.initialPageIndex;
+    });
   }
 
   @override
@@ -79,7 +88,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
           height: 60,
           activeColor: Theme.of(context).colorScheme.onBackground,
           backgroundColor: Colors.black.withOpacity(0.7),
-          initialActiveIndex: 2,
+          initialActiveIndex: widget.initialPageIndex,
           style: TabStyle.react,
           items: const [
             TabItem(
