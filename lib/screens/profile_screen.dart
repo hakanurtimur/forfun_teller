@@ -1,13 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
 import 'package:forfun_teller/services/provider/auth_services.dart';
+import 'package:forfun_teller/services/provider/diamond_services.dart';
+import 'package:forfun_teller/services/provider/fortune_services.dart';
 import 'package:forfun_teller/widgets/inside_scaffold.dart';
 import 'package:provider/provider.dart';
 import 'package:forfun_teller/widgets/profile_info_row.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
   final currentUser = FirebaseAuth.instance.currentUser;
+
+  int? _diamondAmount;
+  int? _fortuneAmount;
+
+  initState() {
+    super.initState();
+    Provider.of<DiamondService>(context, listen: false)
+        .getDiamondAmount(currentUser!.uid)
+        .then((value) => setState(() {
+              _diamondAmount = value;
+            }));
+    Provider.of<FortuneServices>(context, listen: false)
+        .getFortuneAmount(currentUser!.uid)
+        .then((value) => setState(() {
+              _fortuneAmount = value;
+            }));
+  }
+
   @override
   Widget build(BuildContext context) {
     return InsideScaffold(
@@ -65,20 +90,20 @@ class ProfilePage extends StatelessWidget {
                     leadingText: 'E-posta:',
                     trailingText: currentUser!.email,
                   ),
-                  const ProfileInfoRow(
+                  ProfileInfoRow(
                     icon: Icons.coffee,
                     leadingText: 'Kahve Falı Sayısı:',
-                    trailingText: '3',
+                    trailingText: _fortuneAmount.toString(),
                   ),
                   const ProfileInfoRow(
                     icon: Icons.star,
                     leadingText: 'Çevrilen Tarot Sayısı:',
-                    trailingText: '4',
+                    trailingText: '0',
                   ),
-                  const ProfileInfoRow(
+                  ProfileInfoRow(
                     icon: Icons.diamond,
                     leadingText: 'Forfun Diamond:',
-                    trailingText: '4',
+                    trailingText: _diamondAmount.toString(),
                   ),
                   const SizedBox(height: 30),
                   OutlinedButton(

@@ -21,7 +21,8 @@ class ShopPage extends StatelessWidget {
                 ),
                 PadderBox(),
                 Text(
-                  'Parıltılı dünyamızın kapıları sizi bekliyor. Burada, en nadide taşlar ve büyülü mücevherler arasında kaybolup, ruhunuza ışıltı katmanın zamanı geldi.',
+                  'Parıltılı dünyamızın kapıları sizi bekliyor. Burada, '
+                  'en nadide taşlar ve büyülü mücevherler arasında kaybolup, ruhunuza ışıltı katmanın zamanı geldi.',
                   style: TextStyle(fontSize: 14),
                   textAlign: TextAlign.center,
                 ),

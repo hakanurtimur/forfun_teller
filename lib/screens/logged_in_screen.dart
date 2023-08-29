@@ -24,7 +24,7 @@ class MainNavigationBar extends StatefulWidget {
 class _MainNavigationBarState extends State<MainNavigationBar> {
   final currentUser = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 2;
-  int? _diamondAmount; // Yeni değişken
+  int? _diamondAmount;
 
   final List<Widget> _pages = [
     CoffeePage(),

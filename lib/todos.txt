@@ -10,6 +10,7 @@
 -> gmail ile giriş ayarlanacak
 -> şifreyi değiştirme ekle
 -> şifremi unuttum muhabbeti
+-> tarot bölümüyle biraz oyna
 
 // perşembe
 -> validate fonksiyonlarına bir bak

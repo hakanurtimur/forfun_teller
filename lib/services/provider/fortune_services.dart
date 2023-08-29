@@ -153,6 +153,15 @@ class FortuneServices extends ChangeNotifier {
       );
     }
   }
+
+  Future<int> getFortuneAmount(
+    String? userId,
+  ) async {
+    final userCollection = FirebaseFirestore.instance.collection('users');
+    final DocumentSnapshot snapshot = await userCollection.doc(userId).get();
+    var fortuneAmount = (snapshot.data() as Map)['fortunes'].length;
+    return fortuneAmount;
+  }
 }
 
 class NotEnaughDialog extends StatelessWidget {
