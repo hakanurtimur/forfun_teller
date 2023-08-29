@@ -11,6 +11,7 @@
 -> şifreyi değiştirme ekle
 -> şifremi unuttum muhabbeti
 -> tarot bölümüyle biraz oyna
+-> customToastu modala çevirme // maybe vaktin kalırsa
 
 // perşembe
 -> validate fonksiyonlarına bir bak
@@ -29,3 +30,5 @@ APK YAP
 
 // bugün
 --> HOME PAGE CONTROLLERINI YAKALA VE BİR FONKSİYONLA BİRLEŞTİR
+
+--> MESAJLARI DÜZENLE

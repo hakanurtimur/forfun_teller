@@ -25,6 +25,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
   final currentUser = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 2;
   int? _diamondAmount;
+  List<dynamic> successFortunes = [];
 
   final List<Widget> _pages = [
     CoffeePage(),

@@ -6,12 +6,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
+import 'package:forfun_teller/widgets/not_enaugh_dialog.dart';
+import 'package:intl/intl.dart';
 
 class FortuneServices extends ChangeNotifier {
   // private variables
   File? _selectedImage1;
   File? _selectedImage2;
   File? _selectedImage3;
+  List<dynamic> _successFortunes = [];
   bool _isLoading = false;
 
   final currentUser = FirebaseAuth.instance.currentUser;
@@ -23,6 +26,14 @@ class FortuneServices extends ChangeNotifier {
   File? get selectedImage2 => _selectedImage2;
   File? get selectedImage3 => _selectedImage3;
   bool get isLoading => _isLoading;
+  List<dynamic> get successFortunes => _successFortunes;
+
+  // setters
+
+  void setSuccessFortunes(List<dynamic>? value) {
+    _successFortunes = value!;
+    notifyListeners();
+  }
 
   File? getSelectedImageByNumber(index) {
     if (index == 0) {
@@ -131,6 +142,8 @@ class FortuneServices extends ChangeNotifier {
     await storage.ref('/images/').putFile(_selectedImage1!);
   }
 
+  // fortune updates
+
   Future<void> _updateUsersFortunes(
       {required String uid,
       required String fortuneId,
@@ -154,6 +167,8 @@ class FortuneServices extends ChangeNotifier {
     }
   }
 
+  // getting fortune amount
+
   Future<int> getFortuneAmount(
     String? userId,
   ) async {
@@ -162,65 +177,31 @@ class FortuneServices extends ChangeNotifier {
     var fortuneAmount = (snapshot.data() as Map)['fortunes'].length;
     return fortuneAmount;
   }
-}
 
-class NotEnaughDialog extends StatelessWidget {
-  NotEnaughDialog({
-    super.key,
-  });
+  // getting success fortunes
 
-  @override
-  Widget build(BuildContext context) {
-    return Dialog(
-      child: Container(
-          padding: EdgeInsets.all(20),
-          width: MediaQuery.of(context).size.width * 0.8,
-          height: MediaQuery.of(context).size.height * 0.3,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            gradient: LinearGradient(
-              colors: [
-                Theme.of(context).colorScheme.primary,
-                Theme.of(context).colorScheme.secondary,
-              ],
-              begin: Alignment.bottomLeft,
-              end: Alignment.topRight,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("Yeterli Forfun Diamond'ınız yok.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  )),
-              PadderBox(),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/logged');
-                },
-                child: Text('Mağazaya git',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    )),
-                style: kOutlinedButtonStyle,
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/logged');
-                },
-                child: Text('Ana Sayfaya Dön',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                    )),
-                style: kOutlinedButtonStyle,
-              ),
-            ],
-          )),
-    );
+  Future<List<dynamic>?> getSuccessFortunes(String? userId) async {
+    try {
+      final fortuneCollection =
+          FirebaseFirestore.instance.collection('fortunes');
+      final QuerySnapshot snapshot = await fortuneCollection
+          .where('ownerAccountId', isEqualTo: userId)
+          .where('status', isEqualTo: 'success')
+          .get();
+      List<Map<String, dynamic>> successFortunes = [];
+
+      snapshot.docs.forEach((element) {
+        successFortunes.add({
+          'title': element['title'],
+          'fortuneText': element['fortuneText'],
+          'createdAt':
+              DateFormat.Hms().format(element['createdAt'].toDate()).toString(),
+        });
+      });
+      return successFortunes;
+    } on FirebaseException catch (e) {
+      print(e.message);
+      return null;
+    }
   }
 }

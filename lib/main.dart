@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
 import 'package:forfun_teller/screens/carousel_screen.dart';
+import 'package:forfun_teller/screens/fortune_detail_screen.dart';
 import 'package:forfun_teller/screens/fortune_form_screen.dart';
 import 'package:forfun_teller/screens/logged_in_screen.dart';
 import 'package:forfun_teller/screens/update_profile_screen.dart';
@@ -58,6 +59,8 @@ class MyApp extends StatelessWidget {
           '/carousel': (context) => const CarouselScreen(),
           '/fortune_form': (context) => const FortuneFormPage(),
           '/update_profile': (context) => UpdateProfilePage(),
+          '/fortune_detail': (context) =>
+              FortuneDetailPage(fortuneText: '', fortuneTitle: ''),
         },
       ),
     );
