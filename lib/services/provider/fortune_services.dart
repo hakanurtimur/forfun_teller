@@ -14,7 +14,7 @@ class FortuneServices extends ChangeNotifier {
   File? _selectedImage1;
   File? _selectedImage2;
   File? _selectedImage3;
-  List<dynamic> _successFortunes = [];
+
   bool _isLoading = false;
 
   final currentUser = FirebaseAuth.instance.currentUser;
@@ -26,14 +26,8 @@ class FortuneServices extends ChangeNotifier {
   File? get selectedImage2 => _selectedImage2;
   File? get selectedImage3 => _selectedImage3;
   bool get isLoading => _isLoading;
-  List<dynamic> get successFortunes => _successFortunes;
 
   // setters
-
-  void setSuccessFortunes(List<dynamic>? value) {
-    _successFortunes = value!;
-    notifyListeners();
-  }
 
   File? getSelectedImageByNumber(index) {
     if (index == 0) {
@@ -179,29 +173,33 @@ class FortuneServices extends ChangeNotifier {
   }
 
   // getting success fortunes
-
-  Future<List<dynamic>?> getSuccessFortunes(String? userId) async {
+  Stream<List<Map<String, dynamic>>?> getSuccessFortunesStream(String? userId) {
     try {
       final fortuneCollection =
           FirebaseFirestore.instance.collection('fortunes');
-      final QuerySnapshot snapshot = await fortuneCollection
+      final Stream<QuerySnapshot> snapshotStream = fortuneCollection
           .where('ownerAccountId', isEqualTo: userId)
           .where('status', isEqualTo: 'success')
-          .get();
-      List<Map<String, dynamic>> successFortunes = [];
+          .snapshots();
 
-      snapshot.docs.forEach((element) {
-        successFortunes.add({
-          'title': element['title'],
-          'fortuneText': element['fortuneText'],
-          'createdAt':
-              DateFormat.Hms().format(element['createdAt'].toDate()).toString(),
+      return snapshotStream.map((snapshot) {
+        List<Map<String, dynamic>> successFortunes = [];
+
+        snapshot.docs.forEach((element) {
+          successFortunes.add({
+            'title': element['title'],
+            'fortuneText': element['fortuneText'],
+            'createdAt': DateFormat.Hms()
+                .format(element['createdAt'].toDate())
+                .toString(),
+          });
         });
+
+        return successFortunes;
       });
-      return successFortunes;
-    } on FirebaseException catch (e) {
-      print(e.message);
-      return null;
+    } catch (e) {
+      print(e.toString());
+      return Stream.value(null);
     }
   }
 }

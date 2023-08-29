@@ -19,6 +19,7 @@ class _ProfilePageState extends State<ProfilePage> {
   int? _diamondAmount;
   int? _fortuneAmount;
 
+  @override
   initState() {
     super.initState();
     Provider.of<DiamondService>(context, listen: false)

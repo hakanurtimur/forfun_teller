@@ -18,7 +18,6 @@ class ShopCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(Provider.of<DiamondService>(context).sellingDiamondLoading);
     return Container(
       width: MediaQuery.of(context).size.width * 0.3,
       height: MediaQuery.of(context).size.width * 0.3,

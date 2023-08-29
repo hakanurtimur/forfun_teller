@@ -12,6 +12,7 @@
 -> şifremi unuttum muhabbeti
 -> tarot bölümüyle biraz oyna
 -> customToastu modala çevirme // maybe vaktin kalırsa
+-> elmasların updateinde stream gerekir mi ? // maybe vaktin kalırsa
 
 // perşembe
 -> validate fonksiyonlarına bir bak
@@ -24,11 +25,11 @@
 -> sayfa sayfa kontrol et ve düzenle
 -> profile app barda olsun
 -> button disabled incelemeleri // genel olarak isLoading statelerini kontrol et providerlarda
+--> UPDATE MUHABBETİ, serverda anlık veri değişimine yanıt vermiyor, sayfayı tekrar render
+etmek gerekiyor nasıl çözülür
 
 // cuma
 APK YAP
 
 // bugün
 --> HOME PAGE CONTROLLERINI YAKALA VE BİR FONKSİYONLA BİRLEŞTİR
-
---> MESAJLARI DÜZENLE
