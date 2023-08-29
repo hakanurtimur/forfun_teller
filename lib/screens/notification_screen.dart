@@ -31,7 +31,7 @@ class NotificationPage extends StatelessWidget {
             return InsideScaffold(
               childWidget: Container(
                 padding:
-                    EdgeInsets.only(top: 20, left: 10, right: 10, bottom: 10),
+                    EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 10),
                 child: successFortunes != null
                     ? ListView.builder(
                         itemCount: successFortunes.length,
@@ -54,9 +54,18 @@ class NotificationPage extends StatelessWidget {
                                     }));
                                   },
                                   child: Icon(Icons.arrow_forward_ios,
-                                      color: Colors.white),
+                                      color: Colors.white, size: 20),
                                 ),
-                                leading: Icon(Icons.notifications),
+                                leading: Column(
+                                  children: [
+                                    Icon(Icons.notifications),
+                                    Text(
+                                      successFortunes[index]['turnedAt'],
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 14),
+                                    ),
+                                  ],
+                                ),
                                 title: Column(
                                   children: [
                                     Text(successFortunes[index]['createdDate'] +

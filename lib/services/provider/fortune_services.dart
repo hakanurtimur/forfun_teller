@@ -195,12 +195,13 @@ class FortuneServices extends ChangeNotifier {
         snapshot.docs.forEach((element) {
           successFortunes.add({
             'title': element['title'],
+            'turnedAt': DateFormat.Hm().format(DateTime.timestamp()).toString(),
             'fortuneText': element['fortuneText'],
             'owner': element['ownerName'],
             'createdDate': DateFormat.yMd()
                 .format(element['createdAt'].toDate())
                 .toString(),
-            'createdAt': DateFormat.Hms()
+            'createdAt': DateFormat.Hm()
                 .format(element['createdAt'].toDate())
                 .toString(),
           });
