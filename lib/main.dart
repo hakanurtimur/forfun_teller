@@ -59,8 +59,8 @@ class MyApp extends StatelessWidget {
           '/carousel': (context) => const CarouselScreen(),
           '/fortune_form': (context) => const FortuneFormPage(),
           '/update_profile': (context) => UpdateProfilePage(),
-          '/fortune_detail': (context) =>
-              FortuneDetailPage(fortuneText: '', fortuneTitle: ''),
+          '/fortune_detail': (context) => FortuneDetailPage(
+              fortuneText: '', fortuneTitle: '', fortuneOwner: ''),
         },
       ),
     );

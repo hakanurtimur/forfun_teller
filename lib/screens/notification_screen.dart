@@ -48,6 +48,8 @@ class NotificationPage extends StatelessWidget {
                                             ['title'],
                                         fortuneText: successFortunes[index]
                                             ['fortuneText'],
+                                        fortuneOwner: successFortunes[index]
+                                            ['owner'],
                                       );
                                     }));
                                   },
@@ -57,8 +59,8 @@ class NotificationPage extends StatelessWidget {
                                 leading: Icon(Icons.notifications),
                                 title: Column(
                                   children: [
-                                    Text(successFortunes[index]['createdAt'] +
-                                        ' saatinde gönderdiğiniz fal geldi.'),
+                                    Text(successFortunes[index]['createdDate'] +
+                                        ' tarihli fal geldi.'),
                                   ],
                                 ),
                               ),

@@ -196,6 +196,10 @@ class FortuneServices extends ChangeNotifier {
           successFortunes.add({
             'title': element['title'],
             'fortuneText': element['fortuneText'],
+            'owner': element['ownerName'],
+            'createdDate': DateFormat.yMd()
+                .format(element['createdAt'].toDate())
+                .toString(),
             'createdAt': DateFormat.Hms()
                 .format(element['createdAt'].toDate())
                 .toString(),
