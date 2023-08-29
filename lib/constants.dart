@@ -42,7 +42,7 @@ const InputDecoration kInputDecorationStyle = InputDecoration(
   ),
 ); // copy with text
 
-final Color kSuccessColor = Colors.black.withOpacity(0.5);
+final Color kSuccessColor = Colors.green.withOpacity(1);
 final Color kErrorColor = Colors.red.withOpacity(1);
 const Color kInfoColor = Color(0xFFD9736A);
 

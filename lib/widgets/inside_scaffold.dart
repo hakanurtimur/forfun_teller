@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
+import 'package:forfun_teller/services/provider/diamond_services.dart';
 import 'package:forfun_teller/services/provider/tarot_services.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -26,7 +27,8 @@ class InsideScaffold extends StatelessWidget {
           SafeArea(
             child: childWidget,
           ),
-          Provider.of<TarotServices>(context).isLoading
+          Provider.of<TarotServices>(context).isLoading ||
+                  Provider.of<DiamondService>(context).sellingDiamondLoading
               ? Center(
                   child: Container(
                     color: Colors.black.withOpacity(0.5),

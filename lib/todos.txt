@@ -1,21 +1,30 @@
+// çarşamba
 -> pushNamed ların yerine pushReplacementNamed kullan
 -> Width ve heighleri media query ile sağla
 -> image seçimlerinin back buttonlarını düzenle
 -> localizasyonu düzenle
 -> kayıtlı kullanıcılar olsun
--> tokenleri tanımla, profile page i yaz
--> update profile functionlarını set et, giriş ypaıldığında hangi sayfada kalacağını belirle,
 -> storage ı planla
 -> bildirimleri hazırla
 -> telefonların her boyutuna uygun hale getir // paddder box
 -> gmail ile giriş ayarlanacak
 -> şifreyi değiştirme ekle
--> validate fonksiyonlarına bir bak
 -> şifremi unuttum muhabbeti
+
+// perşembe
+-> validate fonksiyonlarına bir bak
 -> storageı düzenle
--> profil seçimöinin storagedan gelmesini sağla
 -> phsycal device test et(upload profile photo)
--> user updateleri ve vs için kullanıcı veri tiplerini ayarla
 -> contextleri asyncların dışına çıkar
 -> widgetları mantıksal olarak dosyalarına ayır
 -> fortune gittikten sonra geri dönüşü düzenle
+--> bazı inputların büyük olması durumunda flexlerin davranışını düzenle
+-> sayfa sayfa kontrol et ve düzenle
+-> profile app barda olsun
+-> button disabled incelemeleri // genel olarak isLoading statelerini kontrol et providerlarda
+
+// cuma
+APK YAP
+
+// bugün
+--> HOME PAGE CONTROLLERINI YAKALA VE BİR FONKSİYONLA BİRLEŞTİR
