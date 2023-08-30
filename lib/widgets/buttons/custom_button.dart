@@ -5,7 +5,8 @@ class CustomButton extends StatelessWidget {
   final Function onPressFunc;
   final bool isNeedIcon;
 
-  CustomButton({
+  const CustomButton({
+    super.key,
     required this.buttonTitle,
     required this.onPressFunc,
     required this.isNeedIcon,

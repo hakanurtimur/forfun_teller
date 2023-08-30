@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 
 class LoggedInScreen extends StatelessWidget {
   final int initialPageIndex;
-  LoggedInScreen({this.initialPageIndex = 2});
+  const LoggedInScreen({super.key, this.initialPageIndex = 2});
   @override
   Widget build(BuildContext context) {
     return MainNavigationBar(
@@ -22,7 +22,7 @@ class LoggedInScreen extends StatelessWidget {
 
 class MainNavigationBar extends StatefulWidget {
   final int initialPageIndex;
-  MainNavigationBar({this.initialPageIndex = 2});
+  const MainNavigationBar({super.key, this.initialPageIndex = 2});
   @override
   _MainNavigationBarState createState() => _MainNavigationBarState();
 }
@@ -34,7 +34,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
   List<dynamic> successFortunes = [];
 
   final List<Widget> _pages = [
-    CoffeePage(),
+    const CoffeePage(),
     TarotPage(),
     ProfilePage(),
     NotificationPage(),
@@ -70,7 +70,7 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text('$_diamondAmount', style: TextStyle(fontSize: 19)),
+                Text('$_diamondAmount', style: const TextStyle(fontSize: 19)),
                 const Icon(Icons.diamond, size: 19),
               ]),
           title: Image.asset('images/logo.png', height: 100),

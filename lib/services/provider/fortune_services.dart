@@ -100,7 +100,7 @@ class FortuneServices extends ChangeNotifier {
     if (!imageCheck()) return;
     try {
       // await storage.ref('/images/').putFile(_selectedImage1!);
-      final fortuneId = Uuid().v4();
+      final fortuneId = const Uuid().v4();
       await _updateUsersFortunes(
           uid: uid, fortuneId: fortuneId, context: context);
       customToast(
@@ -111,7 +111,7 @@ class FortuneServices extends ChangeNotifier {
       Navigator.push(
         context,
         MaterialPageRoute(builder: (context) {
-          return LoggedInScreen(
+          return const LoggedInScreen(
             initialPageIndex: 3,
           );
         }),
@@ -192,25 +192,24 @@ class FortuneServices extends ChangeNotifier {
       return snapshotStream.map((snapshot) {
         List<Map<String, dynamic>> successFortunes = [];
 
-        snapshot.docs.forEach((element) {
+        for (var element in snapshot.docs) {
           successFortunes.add({
             'title': element['title'],
             'turnedAt': DateFormat.Hm().format(DateTime.timestamp()).toString(),
             'fortuneText': element['fortuneText'],
             'owner': element['ownerName'],
-            'createdDate': DateFormat.yMd()
+            'createdDate': DateFormat.Md()
                 .format(element['createdAt'].toDate())
                 .toString(),
             'createdAt': DateFormat.Hm()
                 .format(element['createdAt'].toDate())
                 .toString(),
           });
-        });
+        }
 
         return successFortunes;
       });
     } catch (e) {
-      print(e.toString());
       return Stream.value(null);
     }
   }

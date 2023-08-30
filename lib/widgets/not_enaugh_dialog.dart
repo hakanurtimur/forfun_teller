@@ -3,7 +3,7 @@ import 'package:forfun_teller/constants.dart';
 import 'package:forfun_teller/screens/logged_in_screen.dart';
 
 class NotEnaughDialog extends StatelessWidget {
-  NotEnaughDialog({
+  const NotEnaughDialog({
     super.key,
   });
 
@@ -11,7 +11,7 @@ class NotEnaughDialog extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dialog(
       child: Container(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           width: MediaQuery.of(context).size.width * 0.8,
           height: MediaQuery.of(context).size.height * 0.3,
           decoration: BoxDecoration(
@@ -28,48 +28,48 @@ class NotEnaughDialog extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text("Yeterli Forfun Diamond'ınız yok.",
+              const Text("Yeterli Forfun Diamond'ınız yok.",
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
                   )),
-              PadderBox(),
+              const PadderBox(),
               OutlinedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) {
-                      return LoggedInScreen(
+                      return const LoggedInScreen(
                         initialPageIndex: 4,
                       );
                     }),
                   );
                 },
-                child: Text('Mağazaya git',
+                style: kOutlinedButtonStyle,
+                child: const Text('Mağazaya git',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                     )),
-                style: kOutlinedButtonStyle,
               ),
               OutlinedButton(
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) {
-                      return LoggedInScreen(
+                      return const LoggedInScreen(
                         initialPageIndex: 0,
                       );
                     }),
                   );
                 },
-                child: Text('Ana Sayfaya Dön',
+                style: kOutlinedButtonStyle,
+                child: const Text('Ana Sayfaya Dön',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 15,
                     )),
-                style: kOutlinedButtonStyle,
               ),
             ],
           )),

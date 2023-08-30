@@ -286,7 +286,7 @@ class FortuneFormWidget extends StatelessWidget {
                 backgroundColor: Colors.transparent,
                 context: context,
                 builder: (context) {
-                  return Container(
+                  return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width,
                     child: Container(
@@ -299,7 +299,7 @@ class FortuneFormWidget extends StatelessWidget {
                             begin: Alignment.bottomLeft,
                             end: Alignment.topRight,
                           ),
-                          borderRadius: BorderRadius.only(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(20),
                             topRight: Radius.circular(20),
                           ),
@@ -307,22 +307,23 @@ class FortuneFormWidget extends StatelessWidget {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text('Bu yolculuğun bedeli 1 Forfun Diamond.'),
-                            PadderBox(),
+                            const Text(
+                                'Bu yolculuğun bedeli 1 Forfun Diamond.'),
+                            const PadderBox(),
                             OutlinedButton(
                               onPressed: () {
                                 Navigator.pop(context);
                                 onSubmit();
                               },
-                              child: Text('Onayla'),
                               style: kOutlinedButtonStyle,
+                              child: const Text('Onayla'),
                             ),
                             OutlinedButton(
                               onPressed: () {
                                 Navigator.pop(context);
                               },
-                              child: Text('Vazgeç'),
                               style: kOutlinedButtonStyle,
+                              child: const Text('Vazgeç'),
                             )
                           ],
                         )),

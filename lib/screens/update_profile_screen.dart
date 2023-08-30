@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UpdateProfilePage extends StatefulWidget {
+  const UpdateProfilePage({super.key});
+
   @override
   State<UpdateProfilePage> createState() => _UpdateProfilePageState();
 }
@@ -46,7 +48,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
       childWidget: SingleChildScrollView(
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.8,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

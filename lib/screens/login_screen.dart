@@ -5,6 +5,8 @@ import 'package:forfun_teller/widgets/form-widgets/login_form.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   State<LoginPage> createState() => _LoginPageState();
 }
@@ -14,7 +16,6 @@ class _LoginPageState extends State<LoginPage> {
   void dispose() {
     // TODO: implement dispose
     super.dispose();
-    print('dsipose çalıştı');
   }
 
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -49,7 +50,7 @@ class _LoginPageState extends State<LoginPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Image(
+            const Image(
               width: 100,
               height: 100,
               image: AssetImage('images/icon.png'),

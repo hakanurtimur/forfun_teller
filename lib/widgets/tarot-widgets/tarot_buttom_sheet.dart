@@ -18,7 +18,7 @@ Widget buildBottomSheet(
                   const Text(
                     'Günün Kartı',
                     textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 30, color: Colors.white),
+                    style: TextStyle(fontSize: 30, color: Colors.white),
                   ),
                   Text(
                     cardName,
@@ -53,7 +53,7 @@ Widget buildBottomSheet(
           top: 0, // İstediğiniz konumu ayarlayın
           left: 0, // İstediğiniz konumu ayarlayın
           child: IconButton(
-            icon: Icon(Icons.close, color: Colors.white),
+            icon: const Icon(Icons.close, color: Colors.white),
             onPressed: () {
               Navigator.pop(context);
             },

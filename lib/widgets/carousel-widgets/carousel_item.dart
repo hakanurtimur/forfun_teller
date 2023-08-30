@@ -33,7 +33,7 @@ class CarouselItem extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
+            SizedBox(
                 height: MediaQuery.of(context).size.height * 0.5,
                 width: MediaQuery.of(context).size.width,
                 child: Image.file(selectedImage, fit: BoxFit.contain)),
@@ -44,7 +44,7 @@ class CarouselItem extends StatelessWidget {
         top: 0, // İstediğiniz konumu ayarlayın
         left: 0, // İstediğiniz konumu ayarlayın
         child: IconButton(
-          icon: Icon(Icons.close, color: Colors.white),
+          icon: const Icon(Icons.close, color: Colors.white),
           onPressed: () {
             Navigator.pop(context);
           },

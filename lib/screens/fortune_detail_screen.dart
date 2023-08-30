@@ -6,8 +6,9 @@ class FortuneDetailPage extends StatelessWidget {
   final String? fortuneText;
   final String? fortuneTitle;
   final String fortuneOwner;
-  FortuneDetailPage(
-      {required this.fortuneText,
+  const FortuneDetailPage(
+      {super.key,
+      required this.fortuneText,
       required this.fortuneTitle,
       required this.fortuneOwner});
 
@@ -19,22 +20,23 @@ class FortuneDetailPage extends StatelessWidget {
         children: [
           Container(
             width: double.infinity,
-            padding: EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 20),
+            padding:
+                const EdgeInsets.only(top: 50, left: 20, right: 20, bottom: 20),
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   Text(fortuneTitle!,
                       textAlign: TextAlign.center,
-                      style: TextStyle(
+                      style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.bold)),
-                  PadderBox(),
+                  const PadderBox(),
                   Expanded(
                     // Wrap with Expanded to allow the SingleChildScrollView to take available space
                     child: SingleChildScrollView(
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,16 +44,16 @@ class FortuneDetailPage extends StatelessWidget {
                             Text(
                               'Sevgili $fortuneOwner',
                               textAlign: TextAlign.left,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                               ),
                             ),
-                            PadderBox(),
+                            const PadderBox(),
                             Text(
                               fortuneText!,
                               textAlign: TextAlign.left,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 17,
                               ),
@@ -63,7 +65,8 @@ class FortuneDetailPage extends StatelessWidget {
                   ),
                 ]),
           ),
-          Positioned(child: BackButton(color: Colors.white), top: 0, left: 0),
+          const Positioned(
+              top: 0, left: 0, child: BackButton(color: Colors.white)),
         ],
       ),
     );

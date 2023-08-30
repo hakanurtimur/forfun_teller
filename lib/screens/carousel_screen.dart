@@ -32,7 +32,7 @@ class _CarouselScreenState extends State<CarouselScreen> {
         isContentLoaded = true;
       });
     });
-    Future.delayed(Duration(milliseconds: 250), () {
+    Future.delayed(const Duration(milliseconds: 250), () {
       setState(() {
         fadedOut = true;
       });
@@ -53,11 +53,10 @@ class _CarouselScreenState extends State<CarouselScreen> {
           child: Stack(
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  SizedBox(
-                    height: MediaQuery.of(context).size.height * 0.005,
-                  ),
+                  const PadderBox(),
+                  const PadderBox(),
                   const Text(
                     'İlk olarak fincanınızın fotoğraflarını ekleyin.',
                     style: TextStyle(color: Colors.white, fontSize: 20),
@@ -141,13 +140,15 @@ class _CarouselScreenState extends State<CarouselScreen> {
                       style: TextStyle(fontSize: 20),
                     ),
                   ),
+                  const PadderBox(),
+                  const PadderBox(),
                 ],
               ),
               const PositionedBackButton(
                 buttonTitle: 'Vazgeç',
                 // düzelt
                 isButtonResetting: true,
-              )
+              ),
             ],
           ),
         ),

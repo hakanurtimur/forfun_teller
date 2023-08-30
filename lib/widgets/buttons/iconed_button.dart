@@ -43,7 +43,7 @@ class IconedButton extends StatelessWidget {
           child: Column(
             children: [
               Icon(icon, size: 40, color: Colors.white),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 title,
                 style: const TextStyle(color: Colors.white),

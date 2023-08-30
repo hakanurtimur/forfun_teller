@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:forfun_teller/constants.dart';
 
 class TarotServices extends ChangeNotifier {
   bool _isLoading = false;
@@ -12,7 +13,7 @@ class TarotServices extends ChangeNotifier {
 
   final tarotColection = FirebaseFirestore.instance.collection('tarots');
 
-  Future<dynamic> getTarotById(String id) async {
+  Future<dynamic> getTarotById(String id, BuildContext context) async {
     _setLoading(true);
     try {
       final tarot = await tarotColection.doc(id).get();
@@ -22,7 +23,8 @@ class TarotServices extends ChangeNotifier {
         'imageUrl': tarot.data()!['imageUrl'],
       };
     } on FirebaseException catch (e) {
-      // TODO
+      customToast(
+          msg: e.message!, backgroundColor: kErrorColor, context: context);
     } finally {
       _setLoading(false);
     }

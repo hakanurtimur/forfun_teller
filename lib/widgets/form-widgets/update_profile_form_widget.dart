@@ -21,6 +21,7 @@ class UpdateProfileForm extends StatelessWidget {
   }
 
   UpdateProfileForm({
+    super.key,
     required this.formKey,
     required this.onEmailSaved,
     required this.onNameSaved,

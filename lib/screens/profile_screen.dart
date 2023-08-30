@@ -9,6 +9,8 @@ import 'package:forfun_teller/widgets/profile-widgets/profile_info_row.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
+
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
@@ -37,7 +39,7 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return InsideScaffold(
-      title: '',
+      title: null,
       childWidget: Consumer<AuthServices>(
         builder: (context, authServices, child) => Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -46,14 +48,16 @@ class _ProfilePageState extends State<ProfilePage> {
             Container(
               padding: const EdgeInsets.only(left: 20, right: 20),
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height * 0.7,
+              height: MediaQuery.of(context).size.height * 0.75,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
+                  const PadderBox(),
+                  const PadderBox(),
                   Container(
                     width: MediaQuery.of(context).size.width * 0.3,
                     height: MediaQuery.of(context).size.width * 0.3,
-                    margin: const EdgeInsets.only(bottom: 20),
+                    margin: const EdgeInsets.only(bottom: 10),
                     decoration: BoxDecoration(
                       boxShadow: const [
                         BoxShadow(
@@ -106,37 +110,43 @@ class _ProfilePageState extends State<ProfilePage> {
                     leadingText: 'Forfun Diamond:',
                     trailingText: _diamondAmount.toString(),
                   ),
-                  const SizedBox(height: 30),
-                  OutlinedButton(
-                    style: kOutlinedButtonStyle,
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/update_profile');
-                    },
-                    child: Text(
-                      'Profili Düzenle',
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ),
-                  ElevatedButton(
-                    style: kOutlinedButtonStyle.copyWith(
-                      shape: MaterialStateProperty.all(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
+                  const PadderBox(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      OutlinedButton(
+                        style: kOutlinedButtonStyle,
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/update_profile');
+                        },
+                        child: const Text(
+                          'Profili Düzenle',
+                          style: TextStyle(fontSize: 15),
                         ),
                       ),
-                      backgroundColor: MaterialStateProperty.all(
-                        Colors.black,
+                      ElevatedButton(
+                        style: kOutlinedButtonStyle.copyWith(
+                          shape: MaterialStateProperty.all(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                          ),
+                          backgroundColor: MaterialStateProperty.all(
+                            Colors.black,
+                          ),
+                        ),
+                        onPressed: () async {
+                          await Provider.of<AuthServices>(context,
+                                  listen: false)
+                              .logout();
+                          await Navigator.pushNamed(context, '/');
+                        },
+                        child: const Text(
+                          'Çıkış Yap',
+                          style: TextStyle(fontSize: 15),
+                        ),
                       ),
-                    ),
-                    onPressed: () async {
-                      await Provider.of<AuthServices>(context, listen: false)
-                          .logout();
-                      await Navigator.pushNamed(context, '/');
-                    },
-                    child: Text(
-                      'Çıkış Yap',
-                      style: TextStyle(fontSize: 20),
-                    ),
+                    ],
                   )
                 ],
               ),

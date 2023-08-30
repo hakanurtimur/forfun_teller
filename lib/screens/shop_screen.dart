@@ -4,6 +4,8 @@ import 'package:forfun_teller/widgets/scaffolds/inside_scaffold.dart';
 import 'package:forfun_teller/widgets/shop_card.dart';
 
 class ShopPage extends StatelessWidget {
+  const ShopPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return InsideScaffold(

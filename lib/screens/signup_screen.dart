@@ -6,6 +6,8 @@ import 'package:forfun_teller/widgets/form-widgets/signup_form.dart';
 import 'package:provider/provider.dart';
 
 class SignupPage extends StatefulWidget {
+  const SignupPage({super.key});
+
   @override
   State<SignupPage> createState() => _SignupPageState();
 }

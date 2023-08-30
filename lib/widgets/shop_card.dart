@@ -76,8 +76,8 @@ class ShopCard extends StatelessWidget {
                         },
                         style: kOutlinedButtonStyle,
                         child: Padding(
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 20, vertical: 5),
                           child: !Provider.of<DiamondService>(context)
                                   .sellingDiamondLoading
                               ? const Text(
@@ -132,7 +132,7 @@ class ShopCard extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.diamond,
                     size: 20,
                     color: Colors.white,

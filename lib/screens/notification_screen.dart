@@ -8,6 +8,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 
 class NotificationPage extends StatelessWidget {
+  const NotificationPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -24,62 +26,59 @@ class NotificationPage extends StatelessWidget {
           List<Map<String, dynamic>>? successFortunes = snapshot.data;
           if (successFortunes!.isEmpty) {
             return InsideScaffold(
-              childWidget: Center(child: Text('Henüz falınız yok')),
+              childWidget: const Center(child: Text('Henüz falınız yok')),
               title: 'Fallarınız',
             );
           } else {
             return InsideScaffold(
               childWidget: Container(
-                padding:
-                    EdgeInsets.only(top: 20, left: 0, right: 0, bottom: 10),
-                child: successFortunes != null
-                    ? ListView.builder(
-                        itemCount: successFortunes.length,
-                        itemBuilder: (context, index) {
-                          return Column(
-                            children: [
-                              ListTile(
-                                trailing: TextButton(
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return FortuneDetailPage(
-                                        fortuneTitle: successFortunes[index]
-                                            ['title'],
-                                        fortuneText: successFortunes[index]
-                                            ['fortuneText'],
-                                        fortuneOwner: successFortunes[index]
-                                            ['owner'],
-                                      );
-                                    }));
-                                  },
-                                  child: Icon(Icons.arrow_forward_ios,
-                                      color: Colors.white, size: 20),
+                  padding: const EdgeInsets.only(
+                      top: 20, left: 0, right: 0, bottom: 10),
+                  child: ListView.builder(
+                    itemCount: successFortunes.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          ListTile(
+                            trailing: TextButton(
+                              onPressed: () {
+                                Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return FortuneDetailPage(
+                                    fortuneTitle: successFortunes[index]
+                                        ['title'],
+                                    fortuneText: successFortunes[index]
+                                        ['fortuneText'],
+                                    fortuneOwner: successFortunes[index]
+                                        ['owner'],
+                                  );
+                                }));
+                              },
+                              child: const Icon(Icons.arrow_forward_ios,
+                                  color: Colors.white, size: 20),
+                            ),
+                            leading: Column(
+                              children: [
+                                const Icon(Icons.notifications),
+                                Text(
+                                  successFortunes[index]['turnedAt'],
+                                  style: const TextStyle(
+                                      color: Colors.white, fontSize: 14),
                                 ),
-                                leading: Column(
-                                  children: [
-                                    Icon(Icons.notifications),
-                                    Text(
-                                      successFortunes[index]['turnedAt'],
-                                      style: TextStyle(
-                                          color: Colors.white, fontSize: 14),
-                                    ),
-                                  ],
-                                ),
-                                title: Column(
-                                  children: [
-                                    Text(successFortunes[index]['createdDate'] +
-                                        ' tarihli fal geldi.'),
-                                  ],
-                                ),
-                              ),
-                              Divider(),
-                            ],
-                          );
-                        },
-                      )
-                    : Center(child: CircularProgressIndicator()),
-              ),
+                              ],
+                            ),
+                            title: Column(
+                              children: [
+                                Text(successFortunes[index]['createdDate'] +
+                                    ' tarihli fal geldi.'),
+                              ],
+                            ),
+                          ),
+                          const Divider(),
+                        ],
+                      );
+                    },
+                  )),
               title: 'Fallarınız',
             );
           }

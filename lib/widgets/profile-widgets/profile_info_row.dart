@@ -30,7 +30,7 @@ class ProfileInfoRow extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.3),
             blurRadius: 2,
-            offset: Offset(0, 10),
+            offset: const Offset(0, 10),
           ),
         ],
       ),

@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 class TarotFlipper extends StatefulWidget {
   final FlipCardController con;
-  const TarotFlipper({required this.con});
+  const TarotFlipper({super.key, required this.con});
 
   @override
   State<TarotFlipper> createState() => _TarotFlipperState();
@@ -30,7 +30,7 @@ class _TarotFlipperState extends State<TarotFlipper> {
               )
             : Text(
                 'Kartınız: $cardName',
-                style: TextStyle(fontSize: 22, color: Colors.white),
+                style: const TextStyle(fontSize: 22, color: Colors.white),
               ),
         FlipCard(
           rotateSide: RotateSide.right,
@@ -72,7 +72,7 @@ class _TarotFlipperState extends State<TarotFlipper> {
           widget.con.flipcard();
         }
         var data = await Provider.of<TarotServices>(context, listen: false)
-            .getTarotById('bZzeUboLNUj07DyGPHSG');
+            .getTarotById('bZzeUboLNUj07DyGPHSG', context);
         setState(() {
           imageUrl = data['imageUrl'];
           cardName = data['title'];

@@ -5,6 +5,8 @@ import 'package:forfun_teller/screens/carousel_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
 class CoffeePage extends StatefulWidget {
+  const CoffeePage({super.key});
+
   @override
   State<CoffeePage> createState() => _CoffeePageState();
 }

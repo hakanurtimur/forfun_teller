@@ -8,7 +8,8 @@ class LoginFormWidget extends StatelessWidget {
   final void Function(String?) onPasswordSaved;
   final void Function() onSubmit;
 
-  LoginFormWidget({
+  const LoginFormWidget({
+    super.key,
     required this.formKey,
     required this.onEmailSaved,
     required this.onPasswordSaved,
@@ -18,8 +19,8 @@ class LoginFormWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(10),
-      padding: EdgeInsets.symmetric(vertical: 30, horizontal: 20),
+      margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 20),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.black.withOpacity(0.8),
@@ -94,22 +95,22 @@ class LoginFormWidget extends StatelessWidget {
               const SizedBox(
                 height: 20,
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Icon(
+                  Icon(
                     FontAwesomeIcons.google,
                     color: Colors.white,
                     size: 40,
                   ),
-                  Container(
+                  SizedBox(
                     width: 20,
-                    child: const VerticalDivider(
+                    child: VerticalDivider(
                       width: 30,
                       color: Colors.white,
                     ),
                   ),
-                  const Icon(
+                  Icon(
                     FontAwesomeIcons.facebook,
                     color: Colors.white,
                     size: 40,
