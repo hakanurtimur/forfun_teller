@@ -103,6 +103,7 @@ class FortuneServices extends ChangeNotifier {
       final fortuneId = const Uuid().v4();
       await _updateUsersFortunes(
           uid: uid, fortuneId: fortuneId, context: context);
+      if (!context.mounted) return;
       customToast(
           context: context,
           msg:
@@ -129,6 +130,7 @@ class FortuneServices extends ChangeNotifier {
       );
       resetImages();
     } on FirebaseException catch (e) {
+      if (!context.mounted) return;
       customToast(
           msg: e.message!, context: context, backgroundColor: kErrorColor);
     } finally {
@@ -153,10 +155,11 @@ class FortuneServices extends ChangeNotifier {
     final DocumentSnapshot snapshot = await userCollection.doc(uid).get();
     var diamondAmount = (snapshot.data() as Map)['diamondAmount'];
     if (diamondAmount < 1) {
+      if (!context.mounted) return;
       showDialog(
           barrierDismissible: false,
           context: context,
-          builder: (context) => NotEnaughDialog());
+          builder: (context) => const NotEnaughDialog());
       resetImages();
       throw Exception('Yeterli elmasınız bulunmamaktadır.');
     } else {

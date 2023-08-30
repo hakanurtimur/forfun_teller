@@ -1,7 +1,5 @@
 // çarşamba
 -> pushNamed ların yerine pushReplacementNamed kullan
--> Width ve heighleri media query ile sağla
--> image seçimlerinin back buttonlarını düzenle
 -> localizasyonu düzenle
 -> storage ı planla
 -> bildirimleri hazırla
@@ -16,10 +14,8 @@
 -> validate fonksiyonlarına bir bak
 -> storageı düzenle
 -> phsycal device test et(upload profile photo)
--> contextleri asyncların dışına çıkar
 -> bazı inputların büyük olması durumunda flexlerin davranışını düzenle
 -> sayfa sayfa kontrol et ve düzenle
--> profile app barda olsun
 -> button disabled incelemeleri // genel olarak isLoading statelerini kontrol et providerlarda
 --> UPDATE MUHABBETİ, serverda anlık veri değişimine yanıt vermiyor, sayfayı tekrar render
 etmek gerekiyor nasıl çözülür

@@ -31,18 +31,17 @@ class _FortuneFormPageState extends State<FortuneFormPage> {
 
   Future<void> onSubmit(BuildContext inContext) async {
     User? currentUser = FirebaseAuth.instance.currentUser;
-    formKey.currentState!.validate();
-    formKey.currentState!.save();
-    if (_name.isEmpty) {
-      return;
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+
+      Provider.of<FortuneServices>(context, listen: false).setFortune(
+          context: context,
+          bornDate: _date,
+          ownerName: _name,
+          relationship: _selectedRelationshipText,
+          uid: currentUser!.uid,
+          gender: _gender);
     }
-    Provider.of<FortuneServices>(context, listen: false).setFortune(
-        context: context,
-        bornDate: _date,
-        ownerName: _name,
-        relationship: _selectedRelationshipText,
-        uid: currentUser!.uid,
-        gender: _gender);
   }
 
   @override

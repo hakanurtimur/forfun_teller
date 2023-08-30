@@ -32,20 +32,21 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void onSubmit() async {
-    formKey.currentState!.validate();
-    formKey.currentState!.save();
-    if (password != passwordRepeat) {
-      customToast(
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      if (password != passwordRepeat) {
+        customToast(
+            context: context,
+            msg: 'Şifreler eşleşmiyor',
+            backgroundColor: kErrorColor);
+        return;
+      } else {
+        await Provider.of<AuthServices>(context, listen: false).signUpWithEmail(
+          email: email!,
+          password: password!,
           context: context,
-          msg: 'Şifreler eşleşmiyor',
-          backgroundColor: kErrorColor);
-      return;
-    } else {
-      await Provider.of<AuthServices>(context, listen: false).signUpWithEmail(
-        email: email!,
-        password: password!,
-        context: context,
-      );
+        );
+      }
     }
   }
 

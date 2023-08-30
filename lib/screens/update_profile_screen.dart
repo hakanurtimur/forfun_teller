@@ -28,17 +28,16 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
   }
 
   void onSubmit() async {
-    if (!formKey.currentState!.validate()) {
-      return;
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      await Provider.of<AuthServices>(context, listen: false).updateProfile(
+          email: email!,
+          name: name!,
+          context: context,
+          currentUser: currentUser!);
+      if (!context.mounted) return;
+      Navigator.pushReplacementNamed(context, '/logged');
     }
-    formKey.currentState!.save();
-
-    await Provider.of<AuthServices>(context, listen: false).updateProfile(
-        email: email!,
-        name: name!,
-        context: context,
-        currentUser: currentUser!);
-    Navigator.pushReplacementNamed(context, '/logged');
   }
 
   @override

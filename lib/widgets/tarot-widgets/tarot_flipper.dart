@@ -79,6 +79,7 @@ class _TarotFlipperState extends State<TarotFlipper> {
           cardDescription = data['desc'];
           isFlipped = true;
         });
+        if (!context.mounted) return;
         showModalBottomSheet(
           context: context,
           isScrollControlled: true,

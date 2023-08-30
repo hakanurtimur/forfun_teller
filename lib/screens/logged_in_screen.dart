@@ -24,10 +24,10 @@ class MainNavigationBar extends StatefulWidget {
   final int initialPageIndex;
   const MainNavigationBar({super.key, this.initialPageIndex = 2});
   @override
-  _MainNavigationBarState createState() => _MainNavigationBarState();
+  MainNavigationBarState createState() => MainNavigationBarState();
 }
 
-class _MainNavigationBarState extends State<MainNavigationBar> {
+class MainNavigationBarState extends State<MainNavigationBar> {
   final currentUser = FirebaseAuth.instance.currentUser;
   int _selectedIndex = 0;
   int? _diamondAmount;
@@ -35,10 +35,10 @@ class _MainNavigationBarState extends State<MainNavigationBar> {
 
   final List<Widget> _pages = [
     const CoffeePage(),
-    TarotPage(),
-    ProfilePage(),
-    NotificationPage(),
-    ShopPage(),
+    const TarotPage(),
+    const ProfilePage(),
+    const NotificationPage(),
+    const ShopPage(),
   ];
 
   @override

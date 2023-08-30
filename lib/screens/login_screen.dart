@@ -33,13 +33,14 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void onSubmit() async {
-    formKey.currentState!.validate();
-    formKey.currentState!.save();
-    await Provider.of<AuthServices>(context, listen: false).loginWithEmail(
-      email: email!,
-      password: password!,
-      context: context,
-    );
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+      await Provider.of<AuthServices>(context, listen: false).loginWithEmail(
+        email: email!,
+        password: password!,
+        context: context,
+      );
+    }
   }
 
   @override

@@ -40,7 +40,11 @@ class FortuneFormWidget extends StatelessWidget {
       return 'Geçerli bir isim girin.';
     }
 
-    return null; // Doğrulama başarılı, hata yok.
+    if (value.length > 12) {
+      return 'İsim 12 karakterden uzun olamaz.';
+    }
+
+    return null;
   }
 
   final double _kItemExtent = 32.0;
@@ -134,7 +138,21 @@ class FortuneFormWidget extends StatelessWidget {
                             prefixIcon: const Icon(Icons.person_2)),
                         keyboardType: TextInputType.name,
                         validator: (value) {
-                          return validateName(value!);
+                          if (value == null || value.isEmpty) {
+                            return 'Lütfen bir isim girin.';
+                          }
+
+                          final RegExp nameRegExp =
+                              RegExp(r'^[a-zA-ZğüşıöçĞÜŞİÖÇ]+$');
+                          if (!nameRegExp.hasMatch(value)) {
+                            return 'Geçerli bir isim girin.';
+                          }
+
+                          if (value.length > 12) {
+                            return 'İsim 12 karakterden uzun olamaz.';
+                          }
+
+                          return null;
                         },
                         onSaved: onNameSaved,
                       ),

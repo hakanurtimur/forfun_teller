@@ -139,7 +139,8 @@ class _ProfilePageState extends State<ProfilePage> {
                           await Provider.of<AuthServices>(context,
                                   listen: false)
                               .logout();
-                          await Navigator.pushNamed(context, '/');
+                          if (!context.mounted) return;
+                          Navigator.pushNamed(context, '/');
                         },
                         child: const Text(
                           'Çıkış Yap',

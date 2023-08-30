@@ -27,6 +27,7 @@ class DiamondService extends ChangeNotifier {
       var diamondAmount = userDoc.data()!['diamondAmount'];
       diamondAmount += boughtDiamondAmount;
       await userCollection.doc(userId).update({'diamondAmount': diamondAmount});
+      if (!context.mounted) return;
       customToast(
           msg: 'Satın alma başarılı',
           context: context,

@@ -10,15 +10,6 @@ class UpdateProfileForm extends StatelessWidget {
   final void Function(String?) onEmailSaved;
   final void Function(String?) onNameSaved;
   final void Function() onSubmit;
-  String? _validateName(String? value) {
-    if (value == null || value.isEmpty) {
-      return 'Lütfen bir isim girin.';
-    }
-    if (value.length > 12) {
-      return 'İsim 12 karakterden uzun olamaz.';
-    }
-    return null;
-  }
 
   UpdateProfileForm({
     super.key,
@@ -121,7 +112,13 @@ class UpdateProfileForm extends StatelessWidget {
                   controller: TextEditingController(
                       text: currentUser!.displayName ?? ''),
                   validator: (value) {
-                    return _validateName(value);
+                    if (value == null || value.isEmpty) {
+                      return 'Lütfen bir isim girin.';
+                    }
+                    if (value.length > 12) {
+                      return 'İsim 12 karakterden uzun olamaz.';
+                    }
+                    return null;
                   },
                   onSaved: onNameSaved,
                   keyboardType: TextInputType.emailAddress,

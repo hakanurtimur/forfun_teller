@@ -23,6 +23,7 @@ class TarotServices extends ChangeNotifier {
         'imageUrl': tarot.data()!['imageUrl'],
       };
     } on FirebaseException catch (e) {
+      if (!context.mounted) return;
       customToast(
           msg: e.message!, backgroundColor: kErrorColor, context: context);
     } finally {

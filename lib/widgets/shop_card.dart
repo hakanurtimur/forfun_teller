@@ -71,6 +71,7 @@ class ShopCard extends StatelessWidget {
                                     listen: false)
                                 .sellingDiamondAmount(
                                     currentUser!.uid, diamondCount, context);
+                            if (!context.mounted) return;
                             Navigator.pushReplacementNamed(context, '/logged');
                           }
                         },

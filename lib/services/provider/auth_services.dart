@@ -35,7 +35,7 @@ class AuthServices extends ChangeNotifier {
           .createUserWithEmailAndPassword(email: email, password: password);
       await _registrationForFirestore(
           email: email, password: password, uid: userCredential.user!.uid);
-
+      if (!context.mounted) return;
       customToast(
           context: context,
           msg: 'Kayıt başarılı',
@@ -56,6 +56,7 @@ class AuthServices extends ChangeNotifier {
     _setLoading(true);
     try {
       await auth.signInWithEmailAndPassword(email: email, password: password);
+      if (!context.mounted) return;
       customToast(
           context: context,
           msg: 'Giriş başarılı',
