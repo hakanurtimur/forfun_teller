@@ -24,8 +24,24 @@ class AuthServices extends ChangeNotifier {
   }
 
   // auth functions
-  Future<void> forgetPassword(email) async {
-    return await auth.sendPasswordResetEmail(email: email);
+  Future<void> forgetPassword(
+      {required email, required BuildContext context}) async {
+    _setLoading(true);
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      if (!context.mounted) return;
+      Navigator.pushReplacementNamed(context, '/login');
+      customToast(
+          msg: 'Şifre sıfırlama maili gönderildi',
+          context: context,
+          backgroundColor: kSuccessColor);
+    } on FirebaseAuthException catch (e) {
+      if (!context.mounted) return;
+      customToast(
+          msg: e.message!, context: context, backgroundColor: kErrorColor);
+    } finally {
+      _setLoading(false);
+    }
   }
 
   Future<void> signUpWithEmail(

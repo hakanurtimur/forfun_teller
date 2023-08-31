@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class LoginFormWidget extends StatelessWidget {
+class ForgetFormWidget extends StatelessWidget {
   final GlobalKey<FormState> formKey;
   final void Function(String?) onEmailSaved;
   final void Function(String?) onPasswordSaved;
   final void Function() onSubmit;
 
-  const LoginFormWidget({
+  const ForgetFormWidget({
     super.key,
     required this.formKey,
     required this.onEmailSaved,
@@ -29,9 +28,17 @@ class LoginFormWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Text(
-            'Giriş Yapın',
+            'Emailinizi girin',
             textAlign: TextAlign.center,
             style: kSectionTitleStyle,
+          ),
+          const SizedBox(
+            height: 20,
+          ),
+          Text(
+            'Şifrenizi sıfırlamak için e-mailinizi girin, size bir e-mail '
+            'göndereceğiz. E-mailinizi kontrol edin.',
+            textAlign: TextAlign.center,
           ),
           const SizedBox(
             height: 20,
@@ -58,44 +65,12 @@ class LoginFormWidget extends StatelessWidget {
                       kInputDecorationStyle.copyWith(hintText: 'E-mail'),
                 ),
                 const SizedBox(height: 20),
-                TextFormField(
-                  cursorColor: Colors.white,
-                  obscureText: true,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Lütfen bir şifre girin';
-                    }
-                    return null;
-                  },
-                  onSaved: onPasswordSaved,
-                  decoration: kInputDecorationStyle.copyWith(
-                      hintText: 'Şifre', prefixIcon: const Icon(Icons.lock)),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    const Text('Şifreni mi unuttun? '),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, '/forget_password');
-                      },
-                      child: Text(
-                        'Şifreni sıfırla',
-                        style: TextStyle(
-                            color: const Color(0xFFA64153).withOpacity(0.9)),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 30),
                 SizedBox(
                   width: double.infinity,
                   child: OutlinedButton(
                     onPressed: onSubmit,
                     child: const Text(
-                      'Giriş yap',
+                      'Şifremi emailime gönder',
                       style: TextStyle(color: Colors.white, fontSize: 15),
                     ),
                   ),
@@ -105,35 +80,6 @@ class LoginFormWidget extends StatelessWidget {
           ),
           Column(
             children: [
-              const SizedBox(
-                height: 20,
-              ),
-              const Text('— Ya da —'),
-              const SizedBox(
-                height: 20,
-              ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    FontAwesomeIcons.google,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                  SizedBox(
-                    width: 20,
-                    child: VerticalDivider(
-                      width: 30,
-                      color: Colors.white,
-                    ),
-                  ),
-                  Icon(
-                    FontAwesomeIcons.facebook,
-                    color: Colors.white,
-                    size: 40,
-                  ),
-                ],
-              ),
               const SizedBox(
                 height: 20,
               ),
@@ -147,6 +93,24 @@ class LoginFormWidget extends StatelessWidget {
                     },
                     child: Text(
                       'Bir hesap edin.',
+                      style: TextStyle(
+                          color: const Color(0xFFA64153).withOpacity(0.9)),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushReplacementNamed(context, '/login');
+                    },
+                    child: Text(
+                      'Giriş ekranına dön',
                       style: TextStyle(
                           color: const Color(0xFFA64153).withOpacity(0.9)),
                     ),
