@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
 import 'package:forfun_teller/screens/logged_in_screen.dart';
 
-class NotEnaughDialog extends StatelessWidget {
-  const NotEnaughDialog({
+class NotEnoughDialog extends StatelessWidget {
+  const NotEnoughDialog({
     super.key,
   });
 

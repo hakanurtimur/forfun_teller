@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:forfun_teller/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:uuid/uuid.dart';
 import 'dart:io';
 
 class AuthServices extends ChangeNotifier {
@@ -189,8 +190,9 @@ class AuthServices extends ChangeNotifier {
   }
 
   Future<String?> _imageUploader(user) async {
-    final file =
-        await storage.ref('/images/${user.uid}').putFile(_selectedImage!);
+    final file = await storage
+        .ref('/images/${user.uid}/profileImages/${const Uuid().v4()}')
+        .putFile(_selectedImage!);
     final url = await file.ref.getDownloadURL();
     return url;
   }

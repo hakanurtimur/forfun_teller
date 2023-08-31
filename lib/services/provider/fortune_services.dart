@@ -7,7 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:uuid/uuid.dart';
-import 'package:forfun_teller/widgets/not_enaugh_dialog.dart';
+import 'package:forfun_teller/widgets/not_enough_dialog.dart';
 import 'package:intl/intl.dart';
 
 class FortuneServices extends ChangeNotifier {
@@ -104,8 +104,18 @@ class FortuneServices extends ChangeNotifier {
     _setIsLoading(true);
     if (!imageCheck()) return;
     try {
-      // await storage.ref('/images/').putFile(_selectedImage1!);
       final fortuneId = const Uuid().v4();
+      var url1 = await storage
+          .ref('/images/$uid/fortunes/$fortuneId/fincan-aci-1')
+          .putFile(_selectedImage1!);
+      var url2 = await storage
+          .ref('/images/$uid/fortunes/$fortuneId/fincan-aci-2')
+          .putFile(_selectedImage2!);
+      var url3 = await storage
+          .ref('/images/$uid/fortunes/$fortuneId/fincan-tabagi')
+          .putFile(_selectedImage3!);
+
+      if (!context.mounted) return;
       await _updateUsersFortunes(
           uid: uid, fortuneId: fortuneId, context: context);
       if (!context.mounted) return;
@@ -132,6 +142,11 @@ class FortuneServices extends ChangeNotifier {
           'relationship': relationship,
           'createdAt': DateTime.now(),
           'status': 'pending',
+          'images': [
+            url1.ref.fullPath,
+            url2.ref.fullPath,
+            url3.ref.fullPath,
+          ],
         },
       );
       resetImages();
@@ -165,7 +180,7 @@ class FortuneServices extends ChangeNotifier {
       showDialog(
           barrierDismissible: false,
           context: context,
-          builder: (context) => const NotEnaughDialog());
+          builder: (context) => const NotEnoughDialog());
       resetImages();
       throw Exception('Yeterli elmasınız bulunmamaktadır.');
     } else {

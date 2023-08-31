@@ -9,8 +9,6 @@
 -> elmasların updateinde stream gerekir mi ? // maybe vaktin kalırsa ***
 -> logoyu oluştur ***
 -> firebase execptionları türkçeleştir ?? ***
--> form çıkışlarındadaki keyboard sorunlaru
--> tarot kartlarının state i
 // cuma
 APK YAP
 
