@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flip_card/flutter_flip_card.dart';
+import 'package:forfun_teller/services/provider/tarot_services.dart';
+import 'package:provider/provider.dart';
 
 class FlippingCard extends StatefulWidget {
   final Function onFlip;
@@ -12,6 +14,7 @@ class FlippingCard extends StatefulWidget {
 
 class _FlippingCardState extends State<FlippingCard> {
   FlipCardController con = FlipCardController();
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -20,6 +23,10 @@ class _FlippingCardState extends State<FlippingCard> {
       child: GestureDetector(
         onTap: () {
           setState(() {
+            if (Provider.of<TarotServices>(context, listen: false)
+                .getAllFlipped()) {
+              return;
+            }
             if (con.state!.isFront) {
               con.flipcard();
               widget.onFlip();
@@ -49,7 +56,9 @@ class _FlippingCardState extends State<FlippingCard> {
             width: MediaQuery.of(context).size.width * 0.22,
             height: MediaQuery.of(context).size.width * 0.42,
             child: Image.asset(
-              'images/tarotbg.png',
+              Provider.of<TarotServices>(context).getAllFlipped()
+                  ? widget.imageUrl
+                  : 'images/tarotbg.png',
               fit: BoxFit.cover,
             ),
           ),

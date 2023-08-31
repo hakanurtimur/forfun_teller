@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:forfun_teller/constants.dart';
+import 'package:forfun_teller/services/provider/tarot_services.dart';
 import 'package:forfun_teller/widgets/tarot-widgets/flipping_card.dart';
 import 'package:forfun_teller/widgets/tarot-widgets/tarot_outlined_button.dart';
 import 'package:forfun_teller/widgets/tarot-widgets/tarot_text.dart';
+import 'package:provider/provider.dart';
 
 class TarotFlipper extends StatefulWidget {
   const TarotFlipper({super.key});
@@ -13,7 +15,7 @@ class TarotFlipper extends StatefulWidget {
 
 class _TarotFlipperState extends State<TarotFlipper> {
   Widget buildButton(BuildContext context) {
-    if (isFlipped1 && isFlipped2 && isFlipped3) {
+    if (Provider.of<TarotServices>(context).getAllFlipped()) {
       return TarotActionButton(
         imageUrl1: image1Url,
         imageUrl2: image2Url,
@@ -27,32 +29,16 @@ class _TarotFlipperState extends State<TarotFlipper> {
     }
   }
 
-  late String image1Url;
-  late String image2Url;
-  late String image3Url;
-  late String image1Id;
-  late String image2Id;
-  late String image3Id;
+  // random imageler gelecek
+  String image1Url = 'images/tarot_the_fool.png';
+  String image2Url = 'images/tarot_the_highpriestess.png';
+  String image3Url = 'images/tarot_the_magician.png';
+  String image1Id = 'tarot_the_fool';
+  String image2Id = 'tarot_the_highpriestess';
+  String image3Id = 'tarot_the_magician';
   bool isFlipped1 = false;
   bool isFlipped2 = false;
   bool isFlipped3 = false;
-  String cardName = '';
-  String cardDescription = '';
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Random image fonksiyonu
-    setState(() {
-      image1Url = 'images/tarot_the_fool.png';
-      image2Url = 'images/tarot_the_highpriestess.png';
-      image3Url = 'images/tarot_the_magician.png';
-      image1Id = 'tarot_the_fool';
-      image2Id = 'tarot_the_highpriestess';
-      image3Id = 'tarot_the_magician';
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,9 +67,8 @@ class _TarotFlipperState extends State<TarotFlipper> {
                       child: FlippingCard(
                         imageUrl: 'images/tarot_the_fool.png',
                         onFlip: () {
-                          setState(() {
-                            isFlipped1 = true;
-                          });
+                          Provider.of<TarotServices>(context, listen: false)
+                              .setIsFlipped1(true);
                         },
                       )),
                 ),
@@ -92,9 +77,8 @@ class _TarotFlipperState extends State<TarotFlipper> {
                   child: FlippingCard(
                     imageUrl: 'images/tarot_the_highpriestess.png',
                     onFlip: () {
-                      setState(() {
-                        isFlipped2 = true;
-                      });
+                      Provider.of<TarotServices>(context, listen: false)
+                          .setIsFlipped2(true);
                     },
                   ),
                 ),
@@ -106,9 +90,8 @@ class _TarotFlipperState extends State<TarotFlipper> {
                       child: FlippingCard(
                         imageUrl: 'images/tarot_the_magician.png',
                         onFlip: () {
-                          setState(() {
-                            isFlipped3 = true;
-                          });
+                          Provider.of<TarotServices>(context, listen: false)
+                              .setIsFlipped3(true);
                         },
                       )),
                 ),

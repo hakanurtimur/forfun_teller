@@ -53,15 +53,14 @@ class _CarouselScreenState extends State<CarouselScreen> {
           child: Stack(
             children: [
               Column(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const PadderBox(),
-                  const PadderBox(),
                   const Text(
                     'İlk olarak fincanınızın fotoğraflarını ekleyin.',
                     style: TextStyle(color: Colors.white, fontSize: 20),
                     textAlign: TextAlign.center,
                   ),
+                  PadderBox(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [

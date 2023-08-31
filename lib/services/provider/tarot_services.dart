@@ -4,6 +4,34 @@ import 'package:forfun_teller/constants.dart';
 
 class TarotServices extends ChangeNotifier {
   bool _isLoading = false;
+  String image1Url = 'images/tarot_the_fool.png';
+  String image2Url = 'images/tarot_the_highpriestess.png';
+  String image3Url = 'images/tarot_the_magician.png';
+  String image1Id = 'tarot_the_fool';
+  String image2Id = 'tarot_the_highpriestess';
+  String image3Id = 'tarot_the_magician';
+  bool _isFlipped1 = false;
+  bool _isFlipped2 = false;
+  bool _isFlipped3 = false;
+
+  void setIsFlipped1(bool value) {
+    _isFlipped1 = value;
+    notifyListeners();
+  }
+
+  void setIsFlipped2(bool value) {
+    _isFlipped2 = value;
+    notifyListeners();
+  }
+
+  void setIsFlipped3(bool value) {
+    _isFlipped3 = value;
+    notifyListeners();
+  }
+
+  bool getAllFlipped() {
+    return _isFlipped1 && _isFlipped2 && _isFlipped3;
+  }
 
   bool get isLoading => _isLoading;
   void _setLoading(bool value) {

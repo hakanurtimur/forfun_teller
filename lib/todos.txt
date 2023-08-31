@@ -1,18 +1,16 @@
 
 // perşembe
--> localizasyonu düzenle
--> storageı düzenle
--> phsycal device test et(upload profile photo)
--> bazı inputların büyük olması durumunda flexlerin davranışını düzenle
--> bildirimleri hazırla
--> gmail ile giriş ayarlanacak
--> şifreyi değiştirme ekle
--> şifremi unuttum muhabbeti
--> tarot bölümüyle biraz oyna
--> elmasların updateinde stream gerekir mi ? // maybe vaktin kalırsa
--> logoyu oluştur
--> son bir boyut kontrol
--> firebase execptionları türkçeleştir ??
+-> localizasyonu düzenle ***
+-> storageı düzenle ***
+-> phsycal device test et(upload profile photo) ***
+-> bildirimleri hazırla ***
+-> gmail ile giriş ayarlanacak ***
+-> şifreyi değiştirme ekle ***
+-> elmasların updateinde stream gerekir mi ? // maybe vaktin kalırsa ***
+-> logoyu oluştur ***
+-> firebase execptionları türkçeleştir ?? ***
+-> form çıkışlarındadaki keyboard sorunlaru
+-> tarot kartlarının state i
 // cuma
 APK YAP
 
