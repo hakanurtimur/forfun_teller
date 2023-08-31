@@ -24,6 +24,9 @@ class AuthServices extends ChangeNotifier {
   }
 
   // auth functions
+  Future<void> forgetPassword(email) async {
+    return await auth.sendPasswordResetEmail(email: email);
+  }
 
   Future<void> signUpWithEmail(
       {required String email,
@@ -40,7 +43,8 @@ class AuthServices extends ChangeNotifier {
           context: context,
           msg: 'Kayıt başarılı',
           backgroundColor: kSuccessColor);
-      Navigator.pushNamed(context, '/update_profile');
+      Navigator.pushNamedAndRemoveUntil(
+          context, '/update_profile', (route) => false);
     } on FirebaseAuthException catch (e) {
       customToast(
           msg: e.message!, context: context, backgroundColor: kErrorColor);
@@ -61,7 +65,7 @@ class AuthServices extends ChangeNotifier {
           context: context,
           msg: 'Giriş başarılı',
           backgroundColor: kSuccessColor);
-      Navigator.pushReplacementNamed(context, '/logged');
+      Navigator.pushNamedAndRemoveUntil(context, '/logged', (route) => false);
     } on FirebaseAuthException catch (e) {
       customToast(
           msg: e.message!, context: context, backgroundColor: kErrorColor);

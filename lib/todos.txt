@@ -1,25 +1,18 @@
-// çarşamba
--> pushNamed ların yerine pushReplacementNamed kullan
+
+// perşembe
 -> localizasyonu düzenle
--> storage ı planla
+-> storageı düzenle
+-> phsycal device test et(upload profile photo)
+-> bazı inputların büyük olması durumunda flexlerin davranışını düzenle
 -> bildirimleri hazırla
--> telefonların her boyutuna uygun hale getir // paddder box
 -> gmail ile giriş ayarlanacak
 -> şifreyi değiştirme ekle
 -> şifremi unuttum muhabbeti
 -> tarot bölümüyle biraz oyna
 -> elmasların updateinde stream gerekir mi ? // maybe vaktin kalırsa
-
-// perşembe
--> validate fonksiyonlarına bir bak
--> storageı düzenle
--> phsycal device test et(upload profile photo)
--> bazı inputların büyük olması durumunda flexlerin davranışını düzenle
--> sayfa sayfa kontrol et ve düzenle
--> button disabled incelemeleri // genel olarak isLoading statelerini kontrol et providerlarda
---> UPDATE MUHABBETİ, serverda anlık veri değişimine yanıt vermiyor, sayfayı tekrar render
-etmek gerekiyor nasıl çözülür
-
+-> logoyu oluştur
+-> son bir boyut kontrol
+-> firebase execptionları türkçeleştir ??
 // cuma
 APK YAP
 

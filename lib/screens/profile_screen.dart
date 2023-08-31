@@ -140,7 +140,8 @@ class _ProfilePageState extends State<ProfilePage> {
                                   listen: false)
                               .logout();
                           if (!context.mounted) return;
-                          Navigator.pushNamed(context, '/');
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, '/', (route) => false);
                         },
                         child: const Text(
                           'Çıkış Yap',

@@ -42,6 +42,11 @@ class FortuneServices extends ChangeNotifier {
     }
   }
 
+  void _setIsLoading(value) {
+    _isLoading = value;
+    notifyListeners();
+  }
+
   void resetImages() {
     _selectedImage1 = null;
     _selectedImage2 = null;
@@ -50,7 +55,7 @@ class FortuneServices extends ChangeNotifier {
   }
 
   Future<void> _captureImage(ImageSource source, int imageNumber) async {
-    _isLoading = true;
+    _setIsLoading(true);
     final ImagePicker picker = ImagePicker();
     final image = await picker.pickImage(source: source);
     if (image != null) {
@@ -61,9 +66,9 @@ class FortuneServices extends ChangeNotifier {
       } else if (imageNumber == 3) {
         _selectedImage3 = File(image.path);
       }
-      _isLoading = false;
-      notifyListeners();
     }
+    _setIsLoading(false);
+    notifyListeners();
   }
 
   // capturing image from gallery or camera
@@ -96,7 +101,7 @@ class FortuneServices extends ChangeNotifier {
     required BuildContext context,
     required String uid,
   }) async {
-    _isLoading = true;
+    _setIsLoading(true);
     if (!imageCheck()) return;
     try {
       // await storage.ref('/images/').putFile(_selectedImage1!);
@@ -109,13 +114,14 @@ class FortuneServices extends ChangeNotifier {
           msg:
               'Falınız başarıyla gönderildi, 30 dakika içerisinde gelen kutunuzdan cevabınızı alabilirsiniz.',
           backgroundColor: kSuccessColor);
-      Navigator.push(
+      Navigator.pushAndRemoveUntil(
         context,
         MaterialPageRoute(builder: (context) {
           return const LoggedInScreen(
             initialPageIndex: 3,
           );
         }),
+        (route) => false,
       );
       await fortuneCollection.doc(fortuneId).set(
         {
@@ -134,7 +140,7 @@ class FortuneServices extends ChangeNotifier {
       customToast(
           msg: e.message!, context: context, backgroundColor: kErrorColor);
     } finally {
-      _isLoading = false;
+      _setIsLoading(false);
     }
     notifyListeners();
   }

@@ -36,7 +36,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
           context: context,
           currentUser: currentUser!);
       if (!context.mounted) return;
-      Navigator.pushReplacementNamed(context, '/logged');
+      Navigator.pushNamedAndRemoveUntil(context, '/logged', (route) => false);
     }
   }
 

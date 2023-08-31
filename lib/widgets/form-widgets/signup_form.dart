@@ -142,7 +142,7 @@ class SignupFormWidget extends StatelessWidget {
                   const Text('Bir hesabın mı var? '),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushNamed(context, '/login');
+                      Navigator.pushReplacementNamed(context, '/login');
                     },
                     child: Text(
                       'Giriş yap.',

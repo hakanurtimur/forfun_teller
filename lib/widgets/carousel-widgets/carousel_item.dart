@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:forfun_teller/services/provider/fortune_services.dart';
 import 'dart:io';
 import 'package:forfun_teller/widgets/gallery_buttom_sheet.dart';
-import 'package:provider/provider.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class CarouselItem extends StatelessWidget {
   const CarouselItem({
@@ -71,105 +68,91 @@ class CarouselItem extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
             color: Colors.black.withOpacity(0.7),
           ),
-          child: Stack(
-            children: [
-              selectedImage != null
-                  ? Column(
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            showModalBottomSheet(
-                                context: context,
-                                builder: (context) =>
-                                    imageModal(context, selectedImage!),
-                                isScrollControlled: true,
-                                backgroundColor: Colors.transparent);
+          child: selectedImage != null
+              ? Column(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                            context: context,
+                            builder: (context) =>
+                                imageModal(context, selectedImage!),
+                            isScrollControlled: true,
+                            backgroundColor: Colors.transparent);
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.only(top: 10),
+                          height: 250,
+                          width: 200,
+                          child:
+                              Image.file(selectedImage!, fit: BoxFit.contain)),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (context) {
+                            return galleryBottomSheet(context, imageNumber);
                           },
-                          child: Container(
-                              padding: const EdgeInsets.only(top: 10),
-                              height: 250,
-                              width: 200,
-                              child: Image.file(selectedImage!,
-                                  fit: BoxFit.contain)),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              builder: (context) {
-                                return galleryBottomSheet(context, imageNumber);
-                              },
-                              backgroundColor: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  topLeft: Radius.circular(20),
-                                ),
-                              ),
-                            );
-                          },
-                          child: Text(
-                            'Fotoğrafı değiştir',
-                            style: TextStyle(
-                              color: Colors.white.withOpacity(0.9),
+                          backgroundColor: Colors.transparent,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20),
                             ),
                           ),
+                        );
+                      },
+                      child: Text(
+                        'Fotoğrafı değiştir',
+                        style: TextStyle(
+                          color: Colors.white.withOpacity(0.9),
                         ),
-                      ],
-                    )
-                  : Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        TextButton(
-                          onPressed: () {
-                            showModalBottomSheet(
-                              context: context,
-                              isScrollControlled: true,
-                              builder: (context) {
-                                return galleryBottomSheet(context, imageNumber);
-                              },
-                              backgroundColor: Colors.transparent,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.only(
-                                  topRight: Radius.circular(20),
-                                  topLeft: Radius.circular(20),
-                                ),
-                              ),
-                            );
+                      ),
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          builder: (context) {
+                            return galleryBottomSheet(context, imageNumber);
                           },
-                          child: Icon(
-                            Icons.add,
-                            size: 70,
+                          backgroundColor: Colors.transparent,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.only(
+                              topRight: Radius.circular(20),
+                              topLeft: Radius.circular(20),
+                            ),
+                          ),
+                        );
+                      },
+                      child: Icon(
+                        Icons.add,
+                        size: 70,
+                        color: Colors.white.withOpacity(0.9),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Center(
+                        child: Text(
+                          'Bir fotoğraf seçmek için dokun',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
                             color: Colors.white.withOpacity(0.9),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          child: Center(
-                            child: Text(
-                              'Bir fotoğraf seçmek için dokun',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(
-                                color: Colors.white.withOpacity(0.9),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-              Provider.of<FortuneServices>(context).isLoading
-                  ? Center(
-                      child: Container(
-                        color: Colors.black.withOpacity(0.5),
-                        child: const SpinKitSpinningLines(
-                          color: Colors.white,
-                        ),
                       ),
-                    )
-                  : const SizedBox.shrink(),
-            ],
-          ),
+                    ),
+                  ],
+                ),
         ),
       ],
     );
