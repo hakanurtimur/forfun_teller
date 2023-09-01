@@ -1,14 +1,12 @@
 
-// perşembe
+
 -> localizasyonu düzenle ***
--> storageı düzenle ***
--> phsycal device test et(upload profile photo) ***
 -> bildirimleri hazırla ***
 -> gmail ile giriş ayarlanacak ***
 -> şifreyi değiştirme ekle ***
 -> elmasların updateinde stream gerekir mi ? // maybe vaktin kalırsa ***
--> logoyu oluştur ***
 -> firebase execptionları türkçeleştir ?? ***
-// cuma
-APK YAP
+--> giriş  stabil mi olacak ?
+--> ipa dosyası veya apk dosyası
+
 
