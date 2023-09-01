@@ -83,8 +83,8 @@ class FortuneServices extends ChangeNotifier {
 
   // checking if there is any image selected
   bool imageCheck() {
-    if (_selectedImage1 != null ||
-        _selectedImage2 != null ||
+    if (_selectedImage1 != null &&
+        _selectedImage2 != null &&
         _selectedImage3 != null) {
       return true;
     } else {
